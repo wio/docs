@@ -80,6 +80,10 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../what-is-wio.html">What is Wio?</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Install</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install/install.html">Install</a></li>
+</ul>
 <p class="caption"><span class="caption-text">Configuration</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="config.html">Project Configuration</a><ul class="current">
@@ -160,6 +164,56 @@
             
   <div class="section" id="dependencies-tag">
 <span id="dependencies-tag"></span><h1>Dependencies tag<a class="headerlink" href="#dependencies-tag" title="Permalink to this headline">¶</a></h1>
+<p>A goal of Wio has always been to make iot development easier and modular. No more cloning the repository and linking the code. This is achieved by wio package manager. To specify dependencies, <code class="docutils literal notranslate"><span class="pre">dependencies</span></code> tag must be used in <code class="docutils literal notranslate"><span class="pre">wio.yml</span></code> file</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dependencies</span><span class="p">:</span>
+  <span class="n">pkg1</span><span class="p">:</span>
+    <span class="n">version</span><span class="p">:</span> <span class="mf">0.0</span><span class="o">.</span><span class="mi">1</span>
+    <span class="n">vendor</span><span class="p">:</span> <span class="n">false</span>
+    <span class="n">link_visibility</span><span class="p">:</span> <span class="n">PRIVATE</span>
+    <span class="n">flags</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">Os</span>
+    <span class="n">definitions</span><span class="p">:</span>
+    <span class="o">-</span> <span class="o">-</span><span class="n">DNO_WAY</span>
+
+  <span class="n">pkg2</span><span class="p">:</span>
+    <span class="n">version</span><span class="p">:</span> <span class="n">latest</span>
+    <span class="n">vendor</span><span class="p">:</span> <span class="n">true</span>
+    <span class="n">link_visibility</span><span class="p">:</span> <span class="n">PRIVATE</span>
+    <span class="n">flags</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">Os</span>
+    <span class="n">definitions</span><span class="p">:</span>
+    <span class="o">-</span> <span class="o">-</span><span class="n">DNO_WAY</span>
+    <span class="n">dependency_flags</span><span class="p">:</span>
+        <span class="n">transitive1</span><span class="p">:</span>
+        <span class="o">-</span> <span class="o">--</span><span class="n">strip</span><span class="o">-</span><span class="n">unneeded</span>
+    <span class="n">dependency_definitions</span><span class="p">:</span>
+        <span class="n">transitive2</span><span class="p">:</span>
+        <span class="o">-</span> <span class="o">-</span><span class="n">DMAX_SIZE</span><span class="o">=</span><span class="mi">55</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>There are mainly two types of dependencies: <code class="docutils literal notranslate"><span class="pre">vendor</span></code> and <code class="docutils literal notranslate"><span class="pre">remote</span></code>. Remote dependencies are pulled from the server and vendor dependencies are placed in <code class="docutils literal notranslate"><span class="pre">vendor</span></code> folder located in the root of the project.</li>
+<li>There are three values available for <code class="docutils literal notranslate"><span class="pre">linker_visibility</span></code>: <strong>PRIVATE</strong>, <strong>PUBLIC</strong> and <strong>INTERFACE</strong><ul>
+<li><strong>PRIVATE</strong>: When A links in B as <em>PRIVATE</em>, it is saying that A uses B in its implementation, but B is not used in any part of A’s public API</li>
+<li><strong>INTERFACE</strong>: When A links in B as <em>INTERFACE</em>, it is saying that A does not use B in its implementation, but B is used in A’s public API</li>
+<li><strong>PUBLIC</strong>: When A links in B as <em>PUBLIC</em>, it is essentially a combination of <strong>PRIVATE</strong> and **INTERFACE.</li>
+<li>You can read more about this <a class="reference external" href="https://cmake.org/pipermail/cmake/2016-May/063400.html">here</a></li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">flags</span></code> and <code class="docutils literal notranslate"><span class="pre">definitions</span></code> are applied directly to the dependency<ul>
+<li>Assume <em>PackageA</em> has requested definition <code class="docutils literal notranslate"><span class="pre">-DNUM_BLOCKS</span></code> and it’s dependency <em>PackageB</em> also needs this same definition, user can use placeholder syntax: <code class="docutils literal notranslate"><span class="pre">$(-DNUM_BLOCKS)</span></code>. This will substitute the flag value when requested flag is available.</li>
+<li>This applies to flags as well</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">dependency_flags</span></code> and <code class="docutils literal notranslate"><span class="pre">dependency_definitions</span></code> are flags and definitions to override/provide flags and definitions to all the direct and transitive dependencies for current dependency. There are many uses for this:<ul>
+<li>It allows user to customize the dependency without modifying anything in case it needs to compile those dependencies with different flags/definitions.</li>
+<li>It allows user to provide debug flags/definitions<ul>
+<li><strong>Note:</strong> If user is working with <strong>pkg</strong> project, these dependency flags/definitions are not included when someone included current package</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </div>
 
 

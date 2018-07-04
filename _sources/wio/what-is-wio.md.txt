@@ -20,3 +20,5 @@ A very basic work cycle of the project development using Wio is as follows:
 * In `wio.yml` file, user can specify framework for the board.
 * Based on the board and the framework, Wio links the required toolchain.
 * Users develop code and Wio makes sure it is compiled, uploaded and runs on all the boards specified. 
+
+**Note:** Wio is still in beta and if there are any issues please open an issue on wio repository.

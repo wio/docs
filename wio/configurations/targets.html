@@ -81,12 +81,20 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../what-is-wio.html">What is Wio?</a></li>
 </ul>
+<p class="caption"><span class="caption-text">Install</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install/install.html">Install</a></li>
+</ul>
 <p class="caption"><span class="caption-text">Configuration</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="config.html">Project Configuration</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="app.html">App Tag</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pkg.html">Pkg Tag</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Targets Tag</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Targets Tag</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#app-targets">App Targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pkg-targets">Pkg Targets</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="dependencies.html">Dependencies tag</a></li>
 <li class="toctree-l2"><a class="reference internal" href="config.html#examples">Examples</a></li>
 </ul>
@@ -161,6 +169,96 @@
             
   <div class="section" id="targets-tag">
 <span id="targets-tag"></span><h1>Targets Tag<a class="headerlink" href="#targets-tag" title="Permalink to this headline">¶</a></h1>
+<p>Targets are build units and they are compiled and executed. A wio project can have multiple targets for multiple files, and frameworks. This allows the user to test the codebase for various frameworks, and boards but, also provides an ability to have multiple executables to work with. There are two different types of targets based on the type of wio project user is working with. These are discussed below:</p>
+<div class="section" id="app-targets">
+<span id="app-targets"></span><h2>App Targets<a class="headerlink" href="#app-targets" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">targets</span><span class="p">:</span>
+  <span class="n">default</span><span class="p">:</span> <span class="n">target1</span>
+  <span class="n">create</span><span class="p">:</span>
+    <span class="n">target1</span><span class="p">:</span>
+      <span class="n">src</span><span class="p">:</span> <span class="n">tests</span><span class="o">/</span><span class="n">code1</span>
+      <span class="n">framework</span><span class="p">:</span> <span class="n">cosa</span>
+      <span class="n">board</span><span class="p">:</span> <span class="n">uno</span>
+      <span class="n">definitions</span><span class="p">:</span>
+        <span class="n">global_definitions</span><span class="p">:</span>
+        <span class="o">-</span> <span class="o">-</span><span class="n">DMAX_ALLOCATORS</span><span class="o">=</span><span class="mi">2</span>
+
+    <span class="n">target2</span><span class="p">:</span>
+      <span class="n">src</span><span class="p">:</span> <span class="n">tests</span><span class="o">/</span><span class="n">code2</span>
+      <span class="n">framework</span><span class="p">:</span> <span class="n">cosa</span>
+      <span class="n">board</span><span class="p">:</span> <span class="n">mega</span>
+      <span class="n">flags</span><span class="p">:</span>
+        <span class="n">global_flags</span><span class="p">:</span>
+        <span class="o">-</span> <span class="o">-</span><span class="n">Os</span>
+        <span class="n">target_flags</span><span class="p">:</span>
+        <span class="o">-</span> <span class="o">--</span><span class="n">strip</span><span class="o">-</span><span class="n">unneeded</span>
+      <span class="n">definitions</span><span class="p">:</span>
+        <span class="n">global_definitions</span><span class="p">:</span>
+        <span class="o">-</span> <span class="o">-</span><span class="n">DMAX_BLOCKS</span><span class="o">=</span><span class="mi">45</span>
+        <span class="o">-</span> <span class="o">-</span><span class="n">DNO_WAY</span>
+        <span class="n">target_definitions</span><span class="p">:</span>
+        <span class="o">-</span> <span class="o">-</span><span class="n">DTARGET2</span>          
+</pre></div>
+</div>
+<ul class="simple">
+<li>Targets go under <code class="docutils literal notranslate"><span class="pre">create</span></code> tag as can be seen in the example above where there are two targets: <strong>target1</strong> and <strong>target2</strong></li>
+<li><code class="docutils literal notranslate"><span class="pre">src</span></code> tag allows the user to provide a path for executable files. This path is relative to the project path.</li>
+<li><code class="docutils literal notranslate"><span class="pre">framework</span></code> tag is used to provide the SDK that will be linked with the executable.</li>
+<li><code class="docutils literal notranslate"><span class="pre">board</span></code> tag is used to provide a board if the platform supports hardware. Otherwise this can be set to “null”.</li>
+<li><code class="docutils literal notranslate"><span class="pre">global_flags</span></code> tag is used to provide flobal glags that are used through out the application and even though the dependency tree. These flags come in handy if there needs to be some global configurations.</li>
+<li><code class="docutils literal notranslate"><span class="pre">target_flags</span></code> tag is used to provide flags for the target.</li>
+<li><code class="docutils literal notranslate"><span class="pre">global_definitions</span></code> tag is used to provide global definitions that are used through out the application and even though the dependency tree. These definitions come in handy if there needs to be some global configurations.</li>
+<li><code class="docutils literal notranslate"><span class="pre">target_definitions</span></code> tag is used to provide definitions for the target.</li>
+</ul>
+</div>
+<div class="section" id="pkg-targets">
+<span id="pkg-targets"></span><h2>Pkg Targets<a class="headerlink" href="#pkg-targets" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">targets</span><span class="p">:</span>
+  <span class="n">default</span><span class="p">:</span> <span class="n">target1</span>
+  <span class="n">create</span><span class="p">:</span>
+    <span class="n">target1</span><span class="p">:</span>
+      <span class="n">src</span><span class="p">:</span> <span class="n">tests</span><span class="o">/</span><span class="n">code1</span>
+      <span class="n">framework</span><span class="p">:</span> <span class="n">cosa</span>
+      <span class="n">board</span><span class="p">:</span> <span class="n">uno</span>
+      <span class="n">definitions</span><span class="p">:</span>
+        <span class="n">global_definitions</span><span class="p">:</span>
+        <span class="o">-</span> <span class="o">-</span><span class="n">DMAX_ALLOCATORS</span><span class="o">=</span><span class="mi">2</span>
+
+    <span class="n">target2</span><span class="p">:</span>
+      <span class="n">src</span><span class="p">:</span> <span class="n">tests</span><span class="o">/</span><span class="n">code2</span>
+      <span class="n">framework</span><span class="p">:</span> <span class="n">cosa</span>
+      <span class="n">board</span><span class="p">:</span> <span class="n">mega</span>
+      <span class="n">flags</span><span class="p">:</span>
+        <span class="n">global_flags</span><span class="p">:</span>
+        <span class="o">-</span> <span class="o">-</span><span class="n">Os</span>
+        <span class="n">target_flags</span><span class="p">:</span>
+        <span class="o">-</span> <span class="o">--</span><span class="n">strip</span><span class="o">-</span><span class="n">unneeded</span>
+        <span class="n">pkg_flags</span><span class="p">:</span>
+        <span class="o">-</span> <span class="o">-</span><span class="n">Wl</span>
+      <span class="n">definitions</span><span class="p">:</span>
+        <span class="n">global_definitions</span><span class="p">:</span>
+        <span class="o">-</span> <span class="o">-</span><span class="n">DMAX_BLOCKS</span><span class="o">=</span><span class="mi">45</span>
+        <span class="o">-</span> <span class="o">-</span><span class="n">DNO_WAY</span>
+        <span class="n">target_definitions</span><span class="p">:</span>
+        <span class="o">-</span> <span class="o">-</span><span class="n">DTARGET2</span>
+        <span class="n">pkg_definitions</span><span class="p">:</span>
+        <span class="o">-</span> <span class="n">PACKAGE2</span>              
+</pre></div>
+</div>
+<ul class="simple">
+<li>Targets go under <code class="docutils literal notranslate"><span class="pre">create</span></code> tag as can be seen in the example above where there are two targets: <strong>target1</strong> and <strong>target2</strong></li>
+<li>For <code class="docutils literal notranslate"><span class="pre">pkg</span></code> project type, targets are test targets and include the project as a dependency.</li>
+<li><code class="docutils literal notranslate"><span class="pre">src</span></code> tag allows the user to provide a path for executable files. This path is relative to the project path.</li>
+<li><code class="docutils literal notranslate"><span class="pre">framework</span></code> tag is used to provide the SDK that will be linked with the executable.</li>
+<li><code class="docutils literal notranslate"><span class="pre">board</span></code> tag is used to provide a board if the platform supports hardware. Otherwise this can be set to “null”.</li>
+<li><code class="docutils literal notranslate"><span class="pre">global_flags</span></code> tag is used to provide flobal glags that are used through out the application and even though the dependency tree. These flags come in handy if there needs to be some global configurations.</li>
+<li><code class="docutils literal notranslate"><span class="pre">target_flags</span></code> tag is used to provide flags for the target.</li>
+<li><code class="docutils literal notranslate"><span class="pre">pkg_flags</span></code> tag is used to provide flags for the package dependency.</li>
+<li><code class="docutils literal notranslate"><span class="pre">global_definitions</span></code> tag is used to provide global definitions that are used through out the application and even though the dependency tree. These definitions come in handy if there needs to be some global configurations.</li>
+<li><code class="docutils literal notranslate"><span class="pre">target_definitions</span></code> tag is used to provide definitions for the target.</li>
+<li><code class="docutils literal notranslate"><span class="pre">pkg_definitions</span></code> tag is used to provide definitions for the package dependency.</li>
+</ul>
+</div>
 </div>
 
 

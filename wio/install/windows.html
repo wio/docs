@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Windows &mdash; Wio Docs 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Project Configuration" href="../configurations/config.html" />
+    <link rel="prev" title="MacOS" href="macos.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo_black.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../what-is-wio.html">What is Wio?</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Install</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="install.html">Install</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="linux.html">Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="macos.html">MacOS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scoop">Scoop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#npm">NPM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#wio-build-tools">Wio build Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#platform-toolchain">Platform toolchain</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#atmel-avr-toolchain">Atmel AVR toolchain</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../configurations/config.html">Project Configuration</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Wio Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="install.html">Install</a> &raquo;</li>
+        
+      <li>Windows</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="http://prose.io/#wio/docs/blob/master/docs/wio/install/windows.md" class="fa fa-github"> Edit</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="windows">
+<span id="windows"></span><h1>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h1>
+<p>Wio is available for windows platform through <code class="docutils literal notranslate"><span class="pre">NPM</span></code> and <code class="docutils literal notranslate"><span class="pre">Scoop</span></code>.</p>
+<div class="section" id="scoop">
+<span id="scoop"></span><h2>Scoop<a class="headerlink" href="#scoop" title="Permalink to this headline">¶</a></h2>
+<p>Scoop is a windows package manager. It downloads binaries like how linux package managers do. You can use scoop if you have powershell 13 or above. To install Scoop, type the following in powershell:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>iex <span class="o">(</span>new-object net.webclient<span class="o">)</span>.downloadstring<span class="o">(</span><span class="s1">&#39;https://get.scoop.sh&#39;</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>If you get an error you might need to change the execution policy (i.e. enable Powershell):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>set-executionpolicy -s cu unrestricted
+</pre></div>
+</div>
+<p>Now that you have <code class="docutils literal notranslate"><span class="pre">scoop</span></code>, you can use it to install <code class="docutils literal notranslate"><span class="pre">wio</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scoop bucket add wio http://prose.io/#dhillondeep/wio-bucket.git
+scoop install wio
+</pre></div>
+</div>
+</div>
+<div class="section" id="npm">
+<span id="npm"></span><h2>NPM<a class="headerlink" href="#npm" title="Permalink to this headline">¶</a></h2>
+<p>NPM is a node package manager and can be downloaded using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># using scoop</span>
+scoop install nodejs
+</pre></div>
+</div>
+<p>If you do not want to use <em>scoop</em>, you can download <em>NPM</em> from their <a class="reference external" href="https://nodejs.org/en/download/">official website</a></p>
+<p>Now that you have <code class="docutils literal notranslate"><span class="pre">NPM</span></code> installed, you can use it to install <code class="docutils literal notranslate"><span class="pre">wio</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>npm install -g wio
+</pre></div>
+</div>
+<p>Hurray! you have <strong>wio</strong> installed but wait there are few more things before you get started. You will have to install toolchain for the platform you are building. You will also have to install build tools used by <strong>wio</strong></p>
+</div>
+<div class="section" id="wio-build-tools">
+<span id="wio-build-tools"></span><h2>Wio build Tools<a class="headerlink" href="#wio-build-tools" title="Permalink to this headline">¶</a></h2>
+<p>Wio uses <code class="docutils literal notranslate"><span class="pre">cmake</span></code> and <code class="docutils literal notranslate"><span class="pre">make</span></code> to compile the project. To install <code class="docutils literal notranslate"><span class="pre">cmake</span></code> and <code class="docutils literal notranslate"><span class="pre">make</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># using scoop</span>
+scoop install cmake make
+</pre></div>
+</div>
+<p>If you do not like <code class="docutils literal notranslate"><span class="pre">scoop</span></code> or if you wany more information on how to install, check <a class="reference external" href="https://cmake.org/download/">cmake website</a> and <a class="reference external" href="http://gnuwin32.sourceforge.net/packages/make.htm">make website</a>. <strong>Note</strong>: Make sure to add both cmake and make to Environment PATH.</p>
+</div>
+<div class="section" id="platform-toolchain">
+<span id="platform-toolchain"></span><h2>Platform toolchain<a class="headerlink" href="#platform-toolchain" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="atmel-avr-toolchain">
+<span id="atmel-avr-toolchain"></span><h3>Atmel AVR toolchain<a class="headerlink" href="#atmel-avr-toolchain" title="Permalink to this headline">¶</a></h3>
+<p>This toolchain is used to build any AVR project and must be installed:</p>
+<ul class="simple">
+<li>Download <a class="reference external" href="https://www.arduino.cc/en/Main/Software">Core Arduino</a> and install it. This will contains all the compilers and tools needed for building and uploading the binaries</li>
+<li>Go to Arduino install directory, ex: <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files</span> <span class="pre">(x86)\Arduino</span></code> and from there go to <code class="docutils literal notranslate"><span class="pre">hardware\tools\avr\bin</span></code>. Grab the whole path and add that to your environment PATH</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../configurations/config.html" class="btn btn-neutral float-right" title="Project Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="macos.html" class="btn btn-neutral" title="MacOS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Waterloop.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="http://prose.io/#rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

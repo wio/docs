@@ -14,6 +14,12 @@ Contents
 	wio/what-is-wio
 
 .. toctree::
+	:caption: Install
+	
+	wio/install/install
+
+.. toctree::
 	:caption: Configuration
 	
 	wio/configurations/config
+
