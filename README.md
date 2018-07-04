@@ -4,7 +4,6 @@ Documentation for Wio
 
 ## Contribute
 
-### Build and Display the Docs
 * To build the docs, execute the `docwizard.sh` bash script with `-build` flag
 ```
 ./scripts.docwizard.sh -build
