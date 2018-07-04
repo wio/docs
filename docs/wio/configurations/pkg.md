@@ -23,7 +23,7 @@ meta:
     license: MIT
 ```
 
-All the tags above are required for the project to be published but, `repository` and `organization` tag can be added to specify more information about the package.
+All the tags above are required for the project to be published but, `repository` and `organization` tags can be added to specify more information about the package.
 
 ## Config
 This tag contains meta information about what this package supports. This is important when an app or package uses this package as a dependency because this is used to check compatibility. If package is not compatible, it is not included in the build process.
@@ -81,6 +81,6 @@ compile_options:
     * `required_definitions` tag is an array of definitions requested by the package. These definitions have to be defined by the parent of this package in the dependency tree. If at any moment in dependency tree, these requirements are not met, there is a compile error.
     * `included_definitions` tag is an array of definitions that are included for the package in the build process. No requirements are needed to met.
 * `visibility` tag is used to specify the visbility of flags and definitions in the build process. Available options are:
-    * **PUBLIC**: These definitions will have public scope
-    * **PRIVATE**: These definitions will have private scope
-    * **INTERFACE**: These definitions are used for header only package
+    * **PUBLIC**: These flags/definitions will have public scope
+    * **PRIVATE**: These flags/definitions will have private scope
+    * **INTERFACE**: These flags/definitions are used for header only package
