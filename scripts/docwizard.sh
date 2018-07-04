@@ -84,12 +84,12 @@ if [ "$1" == "-build" ]; then
 	cd _build/html
 	echo "Build Complete"
 	
-	echo "Adding CNAME"
-	if [ cnameURL != "none" ]; then
-		echo "creating CNAME in html: $(pwd)"	
-		echo ${cnameURL} > CNAME
-	fi
-	echo "CNAME added"
+	#echo "Adding CNAME"
+	#if [ cnameURL != "none" ]; then
+	#	echo "creating CNAME in html: $(pwd)"	
+	#	echo ${cnameURL} > CNAME
+	#fi
+	#echo "CNAME added"
 	
 	# link prose.io with the docs
 	echo "Linking Pose editor with the docs"

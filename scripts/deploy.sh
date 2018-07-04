@@ -35,6 +35,9 @@ cp -r docs/_build/html/* out/
 
 # Now let's go have some fun with the cloned repo
 cd out
+
+touch .nojekyll
+
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 

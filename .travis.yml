@@ -9,5 +9,5 @@ script:
     - bash ./scripts/deploy.sh
 env:
   global:
-    - ENCRYPTION_LABEL: a3d4e2b8e5f0
+    - ENCRYPTION_LABEL: d0415f4376a0
     - COMMIT_AUTHOR_EMAIL: "deep@deepdhillon.ca"
