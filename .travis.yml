@@ -1,0 +1,13 @@
+language: python
+python:
+  - 2.7
+before_install:
+    - chmod +x scripts/docwizard.sh
+install:
+    - bash ./scripts/docwizard.sh -install
+script:
+    - bash ./scripts/deploy.sh
+env:
+  global:
+    - ENCRYPTION_LABEL: a3d4e2b8e5f0
+    - COMMIT_AUTHOR_EMAIL: "deep@deepdhillon.ca"
