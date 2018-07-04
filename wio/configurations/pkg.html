@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Pkg Tag &mdash; Wio Docs 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Targets Tag" href="targets.html" />
+    <link rel="prev" title="App Tag" href="app.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo_black.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../what-is-wio.html">What is Wio?</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Configuration</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="config.html">Project Configuration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="app.html">App Tag</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Pkg Tag</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#meta">Meta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#config">Config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compile-options">Compile Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="targets.html">Targets Tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependencies.html">Dependencies tag</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Wio Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="config.html">Project Configuration</a> &raquo;</li>
+        
+      <li>Pkg Tag</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="http://prose.io/#wio/docs/blob/master/docs/wio/configurations/pkg.md" class="fa fa-github"> Edit</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pkg-tag">
+<span id="pkg-tag"></span><h1>Pkg Tag<a class="headerlink" href="#pkg-tag" title="Permalink to this headline">¶</a></h1>
+<p>This is the main tag which contains information about the package and it’s SDK.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ide</span><span class="p">:</span> <span class="n">none</span>
+</pre></div>
+</div>
+<div class="section" id="meta">
+<span id="meta"></span><h2>Meta<a class="headerlink" href="#meta" title="Permalink to this headline">¶</a></h2>
+<p>This tag contains all the information related to publishing the package.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meta</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">example</span>
+    <span class="n">description</span><span class="p">:</span> <span class="n">A</span> <span class="n">wio</span> <span class="n">avr</span> <span class="n">pkg</span> <span class="n">using</span> <span class="n">cosa</span> <span class="n">framework</span>
+    <span class="n">version</span><span class="p">:</span> <span class="mf">0.0</span><span class="o">.</span><span class="mi">1</span>
+    <span class="n">author</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">contributors</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="n">keywords</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">avr</span>
+    <span class="o">-</span> <span class="n">c</span>
+    <span class="o">-</span> <span class="n">c</span><span class="o">++</span>
+    <span class="o">-</span> <span class="n">wio</span>
+    <span class="o">-</span> <span class="n">cosa</span>
+    <span class="n">license</span><span class="p">:</span> <span class="n">MIT</span>
+</pre></div>
+</div>
+<p>All the tags above are required for the project to be published but, <code class="docutils literal notranslate"><span class="pre">repository</span></code> and <code class="docutils literal notranslate"><span class="pre">organization</span></code> tag can be added to specify more information about the package.</p>
+</div>
+<div class="section" id="config">
+<span id="config"></span><h2>Config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h2>
+<p>This tag contains meta information about what this package supports. This is important when an app or package uses this package as a dependency because this is used to check compatibility. If package is not compatible, it is not included in the build process.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">:</span>
+    <span class="n">minimum_wio_version</span><span class="p">:</span> <span class="mf">0.3</span><span class="o">.</span><span class="mi">2</span>
+    <span class="n">supported_platforms</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">avr</span>
+    <span class="n">supported_frameworks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">cosa</span>
+    <span class="n">supported_boards</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">uno</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">supported_platforms</span></code> tag is used to specify all the platforms this app supports. This means that it can be compiled for that platform</li>
+<li><code class="docutils literal notranslate"><span class="pre">supported_frameworks</span></code> tag is used to specify all the frameworks this app supports. This means that it can be compiled using libraries from that framework.</li>
+<li><code class="docutils literal notranslate"><span class="pre">supported_boards</span></code> tag is used to specify the hardware supported by this application. This will be used when uploading application code.</li>
+</ul>
+<p>All these <code class="docutils literal notranslate"><span class="pre">supported</span></code> tags have their <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> compliment tags which do the inverse. Any platform, framework and board specified there will be unsupported in the build process.</p>
+</div>
+<div class="section" id="compile-options">
+<span id="compile-options"></span><h2>Compile Options<a class="headerlink" href="#compile-options" title="Permalink to this headline">¶</a></h2>
+<p>This tag contains configurations for all the compile related stuff. It let’s user provide flags, definitions and also request certain flags and definitions before project is compiled.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">compile_options</span><span class="p">:</span>
+    <span class="n">header_only</span><span class="p">:</span> <span class="n">false</span>
+    <span class="n">platform</span><span class="p">:</span> <span class="n">avr</span>
+  <span class="n">flags</span><span class="p">:</span>
+    <span class="n">allow_only_global_flags</span><span class="p">:</span> <span class="n">false</span>
+    <span class="n">allow_only_required_flags</span><span class="p">:</span> <span class="n">false</span>
+    <span class="n">global_flags</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="n">required_flags</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="n">included_flags</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="n">visibility</span><span class="p">:</span> <span class="n">PRIVATE</span>
+  <span class="n">definitions</span><span class="p">:</span>
+    <span class="n">allow_only_global_definitions</span><span class="p">:</span> <span class="n">false</span>
+    <span class="n">allow_only_required_definitions</span><span class="p">:</span> <span class="n">false</span>
+    <span class="n">global_definitions</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="n">required_definitions</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="n">included_definitions</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="n">visibility</span><span class="p">:</span> <span class="n">PRIVATE</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">header_only</span></code> tag defined if the package is header only or it contains source files. If this flag is not properly set, it can cause many compile issues</li>
+<li><code class="docutils literal notranslate"><span class="pre">platform</span></code> tag is crucial to define the platform this package supports</li>
+<li>Flags:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">allow_only_global_flags</span></code> tag is used when this package only accepts global flags and rejects all other flags.</li>
+<li><code class="docutils literal notranslate"><span class="pre">allow_only_required_flags</span></code> tag is used when this package only accepts required flags and rejects all other flags. <strong>Note:</strong> If both <code class="docutils literal notranslate"><span class="pre">allow_only_global_flags</span></code> and <code class="docutils literal notranslate"><span class="pre">allow_only_required_flags</span></code> are set to true, only global flags are used.</li>
+<li><code class="docutils literal notranslate"><span class="pre">global_flags</span></code> tag is an array of global flags requested by the package. These flags have to be defined by the app using this package for the app to compile.</li>
+<li><code class="docutils literal notranslate"><span class="pre">required_flags</span></code> tag is an array of flags requested by the package. These flags have to be defined by the parent of this package in the dependency tree. If at any moment in dependency tree, these requirements are not met, there is a compile error.</li>
+<li><code class="docutils literal notranslate"><span class="pre">included_flags</span></code> tag is an array of flags that are included for the package in the build process. No requirements are needed to met.</li>
+</ul>
+</li>
+<li>Definitions:<ul>
+<li><code class="docutils literal notranslate"><span class="pre">allow_only_global_definitions</span></code> tag is used when this package only accepts global definitions and rejects all other definitions.</li>
+<li><code class="docutils literal notranslate"><span class="pre">allow_only_required_definitions</span></code> tag is used when this package only accepts required definitions and rejects all other definitions. <strong>Note:</strong> If both <code class="docutils literal notranslate"><span class="pre">allow_only_global_definitions</span></code> and <code class="docutils literal notranslate"><span class="pre">allow_only_required_definitions</span></code> are set to true, only global definitions are used.</li>
+<li><code class="docutils literal notranslate"><span class="pre">global_definitions</span></code> tag is an array of global definitions requested by the package. These definitions have to be defined by the app using this package for the app to compile.</li>
+<li><code class="docutils literal notranslate"><span class="pre">required_definitions</span></code> tag is an array of definitions requested by the package. These definitions have to be defined by the parent of this package in the dependency tree. If at any moment in dependency tree, these requirements are not met, there is a compile error.</li>
+<li><code class="docutils literal notranslate"><span class="pre">included_definitions</span></code> tag is an array of definitions that are included for the package in the build process. No requirements are needed to met.</li>
+</ul>
+</li>
+<li><code class="docutils literal notranslate"><span class="pre">visibility</span></code> tag is used to specify the visbility of flags and definitions in the build process. Available options are:<ul>
+<li><strong>PUBLIC</strong>: These definitions will have public scope</li>
+<li><strong>PRIVATE</strong>: These definitions will have private scope</li>
+<li><strong>INTERFACE</strong>: These definitions are used for header only package</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="targets.html" class="btn btn-neutral float-right" title="Targets Tag" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="app.html" class="btn btn-neutral" title="App Tag" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Waterloop.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="http://prose.io/#rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

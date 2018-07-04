@@ -7,6 +7,13 @@ Codebase: |wio_github_link|
 
    <a href="http://github.com/wio/wio/" target="_blank">Wio</a>
 
+Contents
+--------
 
 .. toctree::
 	wio/what-is-wio
+
+.. toctree::
+	:caption: Configuration
+	
+	wio/configurations/config
