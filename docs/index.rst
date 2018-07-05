@@ -15,11 +15,15 @@ Contents
 
 .. toctree::
 	:caption: Install
+	:maxdepth: 1
 	
-	wio/install/install
+	wio/install/linux
+	wio/install/macos
+	wio/install/windows
 
 .. toctree::
 	:caption: Configuration
+	:maxdepth: 2
 	
 	wio/configurations/config
 
