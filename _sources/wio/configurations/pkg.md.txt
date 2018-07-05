@@ -1,18 +1,25 @@
 # Pkg Tag
-
-This is the main tag which contains information about the package and it's SDK.
+This is the main tag under which all other tags are. It contains information about extra build plugins.
 ```
 ide: none
 ```
 
+```eval_rst
++---------------+-------------------------------------------------------------------------------------------+
+| **Tag Names** | **Tag Description**                                                                       |
++---------------+-------------------------------------------------------------------------------------------+
+| ide           | IDE/test editor supported by wio to help with build process (not supported at the moment) |
++---------------+-------------------------------------------------------------------------------------------+
+```
+
 ## Meta
-This tag contains all the information related to publishing the package.
+This is metadata for the package. When a package is published, this information is used.
 ```
 meta:
     name: example
     description: A wio avr pkg using cosa framework
     version: 0.0.1
-    author: ""
+    author: John Example <john@example.com> (https://github.com/johnexample)
     contributors: []
     keywords:
     - avr
@@ -23,10 +30,11 @@ meta:
     license: MIT
 ```
 
-All the tags above are required for the project to be published but, `repository` and `organization` tags can be added to specify more information about the package.
+* All the tags above are required for the project to be published but, `repository` and `organization` tags can be added to specify more information about the package.
+* **`author`** and **`contributors`** format is exactly like npm format is. You can read more about it on [this website](https://docs.npmjs.com/files/package.json#people-fields-author-contributors).
 
 ## Config
-This tag contains meta information about what this package supports. This is important when an app or package uses this package as a dependency because this is used to check compatibility. If package is not compatible, it is not included in the build process.
+Metadata information for the package that is used to provide information about the package to wio especially when this package is used as dependency. If package is not compatible based on this metadata, it is not included in the build process
 ```
 config:
     minimum_wio_version: 0.3.2
@@ -38,14 +46,30 @@ config:
     - uno
 ```
 
-* `supported_platforms` tag is used to specify all the platforms this app supports. This means that it can be compiled for that platform
-* `supported_frameworks` tag is used to specify all the frameworks this app supports. This means that it can be compiled using libraries from that framework.
-* `supported_boards` tag is used to specify the hardware supported by this application. This will be used when uploading application code.
+```eval_rst
++------------------------+----------------------------------------------+
+| **Tag Names**          | **Tag Description**                          |
++------------------------+----------------------------------------------+
+| supported_platforms    | Platforms supported by this application      |
++------------------------+----------------------------------------------+
+| support_frameworks     | Frameworks supported by this application     |
++------------------------+----------------------------------------------+
+| supported_boards       | Boards supported by this application         |
++------------------------+----------------------------------------------+
+| unsupported_platforms  | Platforms not supported by this application  |
++------------------------+----------------------------------------------+
+| unsupported_frameworks | Frameworks not supported by this application |
++------------------------+----------------------------------------------+
+| unsupported_boards     | Boards not supported by this application     |
++------------------------+----------------------------------------------+
+```
 
-All these `supported` tags have their `unsupported` compliment tags which do the inverse. Any platform, framework and board specified there will be unsupported in the build process.
+* There is a special keyword: **`all`** that can be used for all the `supported` tags to specify that this application supports eveything under that category.
+* If only `unsupported` tag is provided for a category, then everything under that category is supported besided what is specified as unsupported.
+
 
 ## Compile Options
-This tag contains configurations for all the compile related stuff. It let's user provide flags, definitions and also request certain flags and definitions before project is compiled.
+This contains information that is used for compile process. When build process is triggered, information is used from here. All the flags and definitions are requested here.
 ```
 compile_options:
     header_only: false
@@ -66,21 +90,61 @@ compile_options:
     visibility: PRIVATE
 ```
 
-* `header_only` tag defined if the package is header only or it contains source files. If this flag is not properly set, it can cause many compile issues
-* `platform` tag is crucial to define the platform this package supports
-* Flags:
-    * `allow_only_global_flags` tag is used when this package only accepts global flags and rejects all other flags.
-    * `allow_only_required_flags` tag is used when this package only accepts required flags and rejects all other flags. **Note:** If both `allow_only_global_flags` and `allow_only_required_flags` are set to true, only global flags are used.
-    * `global_flags` tag is an array of global flags requested by the package. These flags have to be defined by the app using this package for the app to compile.
-    * `required_flags` tag is an array of flags requested by the package. These flags have to be defined by the parent of this package in the dependency tree. If at any moment in dependency tree, these requirements are not met, there is a compile error.
-    * `included_flags` tag is an array of flags that are included for the package in the build process. No requirements are needed to met.
-* Definitions:
-    * `allow_only_global_definitions` tag is used when this package only accepts global definitions and rejects all other definitions.
-    * `allow_only_required_definitions` tag is used when this package only accepts required definitions and rejects all other definitions. **Note:** If both `allow_only_global_definitions` and `allow_only_required_definitions` are set to true, only global definitions are used.
-    * `global_definitions` tag is an array of global definitions requested by the package. These definitions have to be defined by the app using this package for the app to compile.
-    * `required_definitions` tag is an array of definitions requested by the package. These definitions have to be defined by the parent of this package in the dependency tree. If at any moment in dependency tree, these requirements are not met, there is a compile error.
-    * `included_definitions` tag is an array of definitions that are included for the package in the build process. No requirements are needed to met.
-* `visibility` tag is used to specify the visbility of flags and definitions in the build process. Available options are:
-    * **PUBLIC**: These flags/definitions will have public scope
-    * **PRIVATE**: These flags/definitions will have private scope
-    * **INTERFACE**: These flags/definitions are used for header only package
+```eval_rst
++---------------+---------------------------------------------------------------+
+| **Tag Names** | **Tag Description**                                           |
++---------------+---------------------------------------------------------------+
+| header_only   | Specify if the package is header only                         |
++---------------+---------------------------------------------------------------+
+| Platform      | Platform being used to compile a test target for the package. |
++---------------+---------------------------------------------------------------+
+```
+
+```eval_rst
++---------------------------+-------------------------------------------------------------------------------------+
+| **Tag Names**             | **Tag Description**                                                                 |
++---------------------------+-------------------------------------------------------------------------------------+
+| allow_only_global_flags   | Making this true will make the package only accept global flags                     |
++---------------------------+-------------------------------------------------------------------------------------+
+| allow_only_required_flags | Making this true will make the package only accept required flags                   |
++---------------------------+-------------------------------------------------------------------------------------+
+| global_flags              | A list of global flags requested by the package to be included in the build process |
++---------------------------+-------------------------------------------------------------------------------------+
+| required_flags            | A list of flags required for package to be compiled                                 |
++---------------------------+-------------------------------------------------------------------------------------+
+| included_flags            | A list of flags injected into the build process by the package                      |
++---------------------------+-------------------------------------------------------------------------------------+
+```
+* if both `allow_only_global_flags` and `allow_only_required_flags` are set to true, only global flags are used.
+
+```eval_rst
++---------------------------------+-------------------------------------------------------------------------------------------+
+| **Tag Names**                   | **Tag Description**                                                                       |
++---------------------------------+-------------------------------------------------------------------------------------------+
+| allow_only_global_definitions   | Making this true will make the package only accept global definitions                     |
++---------------------------------+-------------------------------------------------------------------------------------------+
+| allow_only_required_definitions | Making this true will make the package only accept required definitions                   |
++---------------------------------+-------------------------------------------------------------------------------------------+
+| global_definitions              | A list of global definitions requested by the package to be included in the build process |
++---------------------------------+-------------------------------------------------------------------------------------------+
+| required_definitions            | A list of definitions required for package to be compiled                                 |
++---------------------------------+-------------------------------------------------------------------------------------------+
+| included_definitions            | A list of definitions injected into the build process by the package                      |
++---------------------------------+-------------------------------------------------------------------------------------------+
+```
+* if both `allow_only_global_definitions` and `allow_only_required_definitions` are set to true, only global definitions are used.
+
+```eval_rst
++---------------+------------------------------------------------------+
+| **Tag Names** | **Tag Description**                                  |
++---------------+------------------------------------------------------+
+| visibility    | Visibility of flags and definitions in build process |
++---------------+------------------------------------------------------+
+```
+
+Visibility options allowed are:
+* **PUBLIC**: These flags/definitions will have public scope
+* **PRIVATE**: These flags/definitions will have private scope
+* **INTERFACE**: These flags/definitions are used for header only package
+
+You can read more about flags and definitions in the flags section.

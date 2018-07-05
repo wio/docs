@@ -83,7 +83,9 @@
 </ul>
 <p class="caption"><span class="caption-text">Install</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/linux.html">Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/macos.html">MacOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/windows.html">Windows</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Configuration</span></p>
 <ul class="current">
@@ -169,14 +171,28 @@
             
   <div class="section" id="app-tag">
 <span id="app-tag"></span><h1>App Tag<a class="headerlink" href="#app-tag" title="Permalink to this headline">¶</a></h1>
-<p>This is the main tag which contains information about the application and it’s SDK.</p>
+<p>This is the main tag under which all other tags are. It contains information about the name and extra build plugins.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="p">:</span> <span class="n">example</span>
 <span class="n">ide</span><span class="p">:</span> <span class="n">none</span>
 </pre></div>
 </div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Tag Names</strong></td>
+<td><strong>Tag Description</strong></td>
+</tr>
+<tr class="row-even"><td>ide</td>
+<td>IDE/test editor supported by wio to help with build process (not supported at the moment)</td>
+</tr>
+</tbody>
+</table>
 <div class="section" id="config">
 <span id="config"></span><h2>Config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h2>
-<p>This tag contains meta information about what this app supports. This is used to determine tools and matching wio version.</p>
+<p>Metadata information for the application that is used to provide information about the application to wio.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">:</span>
     <span class="n">minimum_wio_version</span><span class="p">:</span> <span class="mf">0.3</span><span class="o">.</span><span class="mi">2</span>
     <span class="n">supported_platforms</span><span class="p">:</span>
@@ -185,22 +201,65 @@
     <span class="o">-</span> <span class="n">cosa</span>
     <span class="n">supported_boards</span><span class="p">:</span>
     <span class="o">-</span> <span class="n">uno</span>
+    <span class="n">unsupported_boards</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">mega2560</span>
 </pre></div>
 </div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Tag Names</strong></td>
+<td><strong>Tag Description</strong></td>
+</tr>
+<tr class="row-even"><td>supported_platforms</td>
+<td>Platforms supported by this application</td>
+</tr>
+<tr class="row-odd"><td>support_frameworks</td>
+<td>Frameworks supported by this application</td>
+</tr>
+<tr class="row-even"><td>supported_boards</td>
+<td>Boards supported by this application</td>
+</tr>
+<tr class="row-odd"><td>unsupported_platforms</td>
+<td>Platforms not supported by this application</td>
+</tr>
+<tr class="row-even"><td>unsupported_frameworks</td>
+<td>Frameworks not supported by this application</td>
+</tr>
+<tr class="row-odd"><td>unsupported_boards</td>
+<td>Boards not supported by this application</td>
+</tr>
+</tbody>
+</table>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">supported_platforms</span></code> tag is used to specify all the platforms this app supports. This means that it can be compiled for that platform</li>
-<li><code class="docutils literal notranslate"><span class="pre">supported_frameworks</span></code> tag is used to specify all the frameworks this app supports. This means that it can be compiled using libraries from that framework.</li>
-<li><code class="docutils literal notranslate"><span class="pre">supported_boards</span></code> tag is used to specify the hardware supported by this application. This will be used when uploading application code.</li>
+<li>There is a special keyword: <strong><code class="docutils literal notranslate"><span class="pre">all</span></code></strong> that can be used for all the <code class="docutils literal notranslate"><span class="pre">supported</span></code> tags to specify that this application supports eveything under that category.</li>
+<li>If only <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> tag is provided for a category, then everything under that category is supported besided what is specified as unsupported.</li>
 </ul>
-<p>All these <code class="docutils literal notranslate"><span class="pre">supported</span></code> tags have their <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> compliment tags which do the inverse. Any platform, framework and board specified there will be unsupported in the build process.</p>
 </div>
 <div class="section" id="compile-options">
 <span id="compile-options"></span><h2>Compile Options<a class="headerlink" href="#compile-options" title="Permalink to this headline">¶</a></h2>
-<p>This tag contains configurations for all the compile related stuff. At the moment there is only one tag and it is used to specify the platform for the app.</p>
+<p>This contains information that is used for compile process. When build process is triggered, information is used from here.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">compile_options</span><span class="p">:</span>
     <span class="n">platform</span><span class="p">:</span> <span class="n">avr</span>
 </pre></div>
 </div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Tag Names</strong></td>
+<td><strong>Tag Description</strong></td>
+</tr>
+<tr class="row-even"><td>platform</td>
+<td>Platform being used to compile a test target for the package.</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 

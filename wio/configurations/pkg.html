@@ -83,7 +83,9 @@
 </ul>
 <p class="caption"><span class="caption-text">Install</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install/install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/linux.html">Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/macos.html">MacOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/windows.html">Windows</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Configuration</span></p>
 <ul class="current">
@@ -170,18 +172,32 @@
             
   <div class="section" id="pkg-tag">
 <span id="pkg-tag"></span><h1>Pkg Tag<a class="headerlink" href="#pkg-tag" title="Permalink to this headline">¶</a></h1>
-<p>This is the main tag which contains information about the package and it’s SDK.</p>
+<p>This is the main tag under which all other tags are. It contains information about extra build plugins.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ide</span><span class="p">:</span> <span class="n">none</span>
 </pre></div>
 </div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Tag Names</strong></td>
+<td><strong>Tag Description</strong></td>
+</tr>
+<tr class="row-even"><td>ide</td>
+<td>IDE/test editor supported by wio to help with build process (not supported at the moment)</td>
+</tr>
+</tbody>
+</table>
 <div class="section" id="meta">
 <span id="meta"></span><h2>Meta<a class="headerlink" href="#meta" title="Permalink to this headline">¶</a></h2>
-<p>This tag contains all the information related to publishing the package.</p>
+<p>This is metadata for the package. When a package is published, this information is used.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">meta</span><span class="p">:</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">example</span>
     <span class="n">description</span><span class="p">:</span> <span class="n">A</span> <span class="n">wio</span> <span class="n">avr</span> <span class="n">pkg</span> <span class="n">using</span> <span class="n">cosa</span> <span class="n">framework</span>
     <span class="n">version</span><span class="p">:</span> <span class="mf">0.0</span><span class="o">.</span><span class="mi">1</span>
-    <span class="n">author</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">author</span><span class="p">:</span> <span class="n">John</span> <span class="n">Example</span> <span class="o">&lt;</span><span class="n">john</span><span class="nd">@example</span><span class="o">.</span><span class="n">com</span><span class="o">&gt;</span> <span class="p">(</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">johnexample</span><span class="p">)</span>
     <span class="n">contributors</span><span class="p">:</span> <span class="p">[]</span>
     <span class="n">keywords</span><span class="p">:</span>
     <span class="o">-</span> <span class="n">avr</span>
@@ -192,11 +208,14 @@
     <span class="n">license</span><span class="p">:</span> <span class="n">MIT</span>
 </pre></div>
 </div>
-<p>All the tags above are required for the project to be published but, <code class="docutils literal notranslate"><span class="pre">repository</span></code> and <code class="docutils literal notranslate"><span class="pre">organization</span></code> tags can be added to specify more information about the package.</p>
+<ul class="simple">
+<li>All the tags above are required for the project to be published but, <code class="docutils literal notranslate"><span class="pre">repository</span></code> and <code class="docutils literal notranslate"><span class="pre">organization</span></code> tags can be added to specify more information about the package.</li>
+<li><strong><code class="docutils literal notranslate"><span class="pre">author</span></code></strong> and <strong><code class="docutils literal notranslate"><span class="pre">contributors</span></code></strong> format is exactly like npm format is. You can read more about it on <a class="reference external" href="https://docs.npmjs.com/files/package.json#people-fields-author-contributors">this website</a>.</li>
+</ul>
 </div>
 <div class="section" id="config">
 <span id="config"></span><h2>Config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h2>
-<p>This tag contains meta information about what this package supports. This is important when an app or package uses this package as a dependency because this is used to check compatibility. If package is not compatible, it is not included in the build process.</p>
+<p>Metadata information for the package that is used to provide information about the package to wio especially when this package is used as dependency. If package is not compatible based on this metadata, it is not included in the build process</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">config</span><span class="p">:</span>
     <span class="n">minimum_wio_version</span><span class="p">:</span> <span class="mf">0.3</span><span class="o">.</span><span class="mi">2</span>
     <span class="n">supported_platforms</span><span class="p">:</span>
@@ -207,16 +226,43 @@
     <span class="o">-</span> <span class="n">uno</span>
 </pre></div>
 </div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Tag Names</strong></td>
+<td><strong>Tag Description</strong></td>
+</tr>
+<tr class="row-even"><td>supported_platforms</td>
+<td>Platforms supported by this application</td>
+</tr>
+<tr class="row-odd"><td>support_frameworks</td>
+<td>Frameworks supported by this application</td>
+</tr>
+<tr class="row-even"><td>supported_boards</td>
+<td>Boards supported by this application</td>
+</tr>
+<tr class="row-odd"><td>unsupported_platforms</td>
+<td>Platforms not supported by this application</td>
+</tr>
+<tr class="row-even"><td>unsupported_frameworks</td>
+<td>Frameworks not supported by this application</td>
+</tr>
+<tr class="row-odd"><td>unsupported_boards</td>
+<td>Boards not supported by this application</td>
+</tr>
+</tbody>
+</table>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">supported_platforms</span></code> tag is used to specify all the platforms this app supports. This means that it can be compiled for that platform</li>
-<li><code class="docutils literal notranslate"><span class="pre">supported_frameworks</span></code> tag is used to specify all the frameworks this app supports. This means that it can be compiled using libraries from that framework.</li>
-<li><code class="docutils literal notranslate"><span class="pre">supported_boards</span></code> tag is used to specify the hardware supported by this application. This will be used when uploading application code.</li>
+<li>There is a special keyword: <strong><code class="docutils literal notranslate"><span class="pre">all</span></code></strong> that can be used for all the <code class="docutils literal notranslate"><span class="pre">supported</span></code> tags to specify that this application supports eveything under that category.</li>
+<li>If only <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> tag is provided for a category, then everything under that category is supported besided what is specified as unsupported.</li>
 </ul>
-<p>All these <code class="docutils literal notranslate"><span class="pre">supported</span></code> tags have their <code class="docutils literal notranslate"><span class="pre">unsupported</span></code> compliment tags which do the inverse. Any platform, framework and board specified there will be unsupported in the build process.</p>
 </div>
 <div class="section" id="compile-options">
 <span id="compile-options"></span><h2>Compile Options<a class="headerlink" href="#compile-options" title="Permalink to this headline">¶</a></h2>
-<p>This tag contains configurations for all the compile related stuff. It let’s user provide flags, definitions and also request certain flags and definitions before project is compiled.</p>
+<p>This contains information that is used for compile process. When build process is triggered, information is used from here. All the flags and definitions are requested here.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">compile_options</span><span class="p">:</span>
     <span class="n">header_only</span><span class="p">:</span> <span class="n">false</span>
     <span class="n">platform</span><span class="p">:</span> <span class="n">avr</span>
@@ -236,32 +282,102 @@
     <span class="n">visibility</span><span class="p">:</span> <span class="n">PRIVATE</span>
 </pre></div>
 </div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Tag Names</strong></td>
+<td><strong>Tag Description</strong></td>
+</tr>
+<tr class="row-even"><td>header_only</td>
+<td>Specify if the package is header only</td>
+</tr>
+<tr class="row-odd"><td>Platform</td>
+<td>Platform being used to compile a test target for the package.</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Tag Names</strong></td>
+<td><strong>Tag Description</strong></td>
+</tr>
+<tr class="row-even"><td>allow_only_global_flags</td>
+<td>Making this true will make the package only accept global flags</td>
+</tr>
+<tr class="row-odd"><td>allow_only_required_flags</td>
+<td>Making this true will make the package only accept required flags</td>
+</tr>
+<tr class="row-even"><td>global_flags</td>
+<td>A list of global flags requested by the package to be included in the build process</td>
+</tr>
+<tr class="row-odd"><td>required_flags</td>
+<td>A list of flags required for package to be compiled</td>
+</tr>
+<tr class="row-even"><td>included_flags</td>
+<td>A list of flags injected into the build process by the package</td>
+</tr>
+</tbody>
+</table>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">header_only</span></code> tag defined if the package is header only or it contains source files. If this flag is not properly set, it can cause many compile issues</li>
-<li><code class="docutils literal notranslate"><span class="pre">platform</span></code> tag is crucial to define the platform this package supports</li>
-<li>Flags:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">allow_only_global_flags</span></code> tag is used when this package only accepts global flags and rejects all other flags.</li>
-<li><code class="docutils literal notranslate"><span class="pre">allow_only_required_flags</span></code> tag is used when this package only accepts required flags and rejects all other flags. <strong>Note:</strong> If both <code class="docutils literal notranslate"><span class="pre">allow_only_global_flags</span></code> and <code class="docutils literal notranslate"><span class="pre">allow_only_required_flags</span></code> are set to true, only global flags are used.</li>
-<li><code class="docutils literal notranslate"><span class="pre">global_flags</span></code> tag is an array of global flags requested by the package. These flags have to be defined by the app using this package for the app to compile.</li>
-<li><code class="docutils literal notranslate"><span class="pre">required_flags</span></code> tag is an array of flags requested by the package. These flags have to be defined by the parent of this package in the dependency tree. If at any moment in dependency tree, these requirements are not met, there is a compile error.</li>
-<li><code class="docutils literal notranslate"><span class="pre">included_flags</span></code> tag is an array of flags that are included for the package in the build process. No requirements are needed to met.</li>
+<li>if both <code class="docutils literal notranslate"><span class="pre">allow_only_global_flags</span></code> and <code class="docutils literal notranslate"><span class="pre">allow_only_required_flags</span></code> are set to true, only global flags are used.</li>
 </ul>
-</li>
-<li>Definitions:<ul>
-<li><code class="docutils literal notranslate"><span class="pre">allow_only_global_definitions</span></code> tag is used when this package only accepts global definitions and rejects all other definitions.</li>
-<li><code class="docutils literal notranslate"><span class="pre">allow_only_required_definitions</span></code> tag is used when this package only accepts required definitions and rejects all other definitions. <strong>Note:</strong> If both <code class="docutils literal notranslate"><span class="pre">allow_only_global_definitions</span></code> and <code class="docutils literal notranslate"><span class="pre">allow_only_required_definitions</span></code> are set to true, only global definitions are used.</li>
-<li><code class="docutils literal notranslate"><span class="pre">global_definitions</span></code> tag is an array of global definitions requested by the package. These definitions have to be defined by the app using this package for the app to compile.</li>
-<li><code class="docutils literal notranslate"><span class="pre">required_definitions</span></code> tag is an array of definitions requested by the package. These definitions have to be defined by the parent of this package in the dependency tree. If at any moment in dependency tree, these requirements are not met, there is a compile error.</li>
-<li><code class="docutils literal notranslate"><span class="pre">included_definitions</span></code> tag is an array of definitions that are included for the package in the build process. No requirements are needed to met.</li>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Tag Names</strong></td>
+<td><strong>Tag Description</strong></td>
+</tr>
+<tr class="row-even"><td>allow_only_global_definitions</td>
+<td>Making this true will make the package only accept global definitions</td>
+</tr>
+<tr class="row-odd"><td>allow_only_required_definitions</td>
+<td>Making this true will make the package only accept required definitions</td>
+</tr>
+<tr class="row-even"><td>global_definitions</td>
+<td>A list of global definitions requested by the package to be included in the build process</td>
+</tr>
+<tr class="row-odd"><td>required_definitions</td>
+<td>A list of definitions required for package to be compiled</td>
+</tr>
+<tr class="row-even"><td>included_definitions</td>
+<td>A list of definitions injected into the build process by the package</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>if both <code class="docutils literal notranslate"><span class="pre">allow_only_global_definitions</span></code> and <code class="docutils literal notranslate"><span class="pre">allow_only_required_definitions</span></code> are set to true, only global definitions are used.</li>
 </ul>
-</li>
-<li><code class="docutils literal notranslate"><span class="pre">visibility</span></code> tag is used to specify the visbility of flags and definitions in the build process. Available options are:<ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="78%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Tag Names</strong></td>
+<td><strong>Tag Description</strong></td>
+</tr>
+<tr class="row-even"><td>visibility</td>
+<td>Visibility of flags and definitions in build process</td>
+</tr>
+</tbody>
+</table>
+<p>Visibility options allowed are:</p>
+<ul class="simple">
 <li><strong>PUBLIC</strong>: These flags/definitions will have public scope</li>
 <li><strong>PRIVATE</strong>: These flags/definitions will have private scope</li>
 <li><strong>INTERFACE</strong>: These flags/definitions are used for header only package</li>
 </ul>
-</li>
-</ul>
+<p>You can read more about flags and definitions in the flags section.</p>
 </div>
 </div>
 
