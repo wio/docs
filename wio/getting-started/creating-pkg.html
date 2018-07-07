@@ -1,0 +1,398 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Creating Pkg &mdash; Wio Docs 1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Project Configuration" href="../configurations/config.html" />
+    <link rel="prev" title="Creating App" href="creating-app.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo_black.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../what-is-wio.html">What is Wio?</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Install</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install/linux.html">Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/macos.html">MacOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install/windows.html">Windows</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="creating-app.html">Creating App</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating Pkg</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-the-project">Setting up the Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#project-structure">Project Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#source-files">Source Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-and-upload-test-target">Run and Upload Test target</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../configurations/config.html">Project Configuration</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Wio Docs</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Creating Pkg</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="http://prose.io/#wio/docs/blob/master/docs/wio/getting-started/creating-pkg.md" class="fa fa-github"> Edit</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="creating-pkg">
+<span id="creating-pkg"></span><h1>Creating Pkg<a class="headerlink" href="#creating-pkg" title="Permalink to this headline">¶</a></h1>
+<p>Project of type <code class="docutils literal notranslate"><span class="pre">pkg</span></code> is a package that is meant to be imported by other projects. This makes code sharing easier and modular.</p>
+<div class="section" id="setting-up-the-project">
+<span id="setting-up-the-project"></span><h2>Setting up the Project<a class="headerlink" href="#setting-up-the-project" title="Permalink to this headline">¶</a></h2>
+<p>Create wio example project</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wio</span> <span class="n">create</span> <span class="n">pkg</span> <span class="n">avr</span> <span class="n">testDir</span> <span class="o">--</span><span class="n">create</span><span class="o">-</span><span class="n">example</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>This will create a project in directory <code class="docutils literal notranslate"><span class="pre">testDir</span></code></li>
+<li>The board for the test target is set to <code class="docutils literal notranslate"><span class="pre">uno</span></code> by default</li>
+</ul>
+</div>
+<div class="section" id="project-structure">
+<span id="project-structure"></span><h2>Project Structure<a class="headerlink" href="#project-structure" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>testDir
+├── include
+│   └── output.h
+├── src
+│   └── output.cpp
+├── tests
+│   └── main.cpp
+├── wio.yml
+</pre></div>
+</div>
+</div>
+<div class="section" id="source-files">
+<span id="source-files"></span><h2>Source Files<a class="headerlink" href="#source-files" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">wio.yml</span></code></li>
+</ul>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># define global pkg configurations. This is a package and is created to be used by other wio projects. Even though</span>
+<span class="c1"># package cannot be built, it can be tested by using &quot;tests&quot; directory. Some terminology:</span>
+<span class="c1"># - Framework: SDK for the application (cosa, arduino, c, c++, etc)</span>
+<span class="c1"># - Platform: platform to build application for</span>
+<span class="c1"># - Dependencies: wio packages</span>
+<span class="l l-Scalar l-Scalar-Plain">pkg</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">ide</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">none</span>
+
+  <span class="l l-Scalar l-Scalar-Plain">meta</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">testDir</span>
+    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">A wio avr pkg using cosa framework</span>
+    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.1</span>
+    <span class="l l-Scalar l-Scalar-Plain">keywords</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">avr</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">c</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">c++</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">wio</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cosa</span>
+    <span class="l l-Scalar l-Scalar-Plain">license</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">MIT</span>
+
+  <span class="l l-Scalar l-Scalar-Plain">config</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">minimum_wio_version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.3.2</span>
+    <span class="l l-Scalar l-Scalar-Plain">supported_platforms</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">avr</span>
+    <span class="l l-Scalar l-Scalar-Plain">supported_frameworks</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cosa</span>
+    <span class="l l-Scalar l-Scalar-Plain">supported_boards</span><span class="p p-Indicator">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">uno</span>
+
+  <span class="l l-Scalar l-Scalar-Plain">compile_options</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">header_only</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="l l-Scalar l-Scalar-Plain">platform</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">avr</span>
+  <span class="l l-Scalar l-Scalar-Plain">flags</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">allow_only_global_flags</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="l l-Scalar l-Scalar-Plain">allow_only_required_flags</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="l l-Scalar l-Scalar-Plain">global_flags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
+    <span class="l l-Scalar l-Scalar-Plain">visibility</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">PRIVATE</span>
+  <span class="l l-Scalar l-Scalar-Plain">definitions</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">allow_only_global_definitions</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="l l-Scalar l-Scalar-Plain">allow_only_required_definitions</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+    <span class="l l-Scalar l-Scalar-Plain">global_definitions</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
+    <span class="l l-Scalar l-Scalar-Plain">visibility</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">PRIVATE</span>
+
+<span class="c1"># &quot;targets&quot; tag allows for testing and development for various settings and configurations. You can create</span>
+<span class="c1"># multiple targets where you can define different types of boards, frameworks and flags. By default one target</span>
+<span class="c1"># is created, which is defined based on settings provided in the creation process.</span>
+<span class="l l-Scalar l-Scalar-Plain">targets</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">tests</span>
+  <span class="l l-Scalar l-Scalar-Plain">create</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">tests</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">src</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">tests</span>
+      <span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cosa</span>
+      <span class="l l-Scalar l-Scalar-Plain">board</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uno</span>
+      <span class="l l-Scalar l-Scalar-Plain">flags</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">global_flags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
+        <span class="l l-Scalar l-Scalar-Plain">target_flags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
+        <span class="l l-Scalar l-Scalar-Plain">pkg_flags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
+      <span class="l l-Scalar l-Scalar-Plain">definitions</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">global_definitions</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
+        <span class="l l-Scalar l-Scalar-Plain">target_definitions</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
+        <span class="l l-Scalar l-Scalar-Plain">pkg_definitions</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">include/output.h</span></code></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef OUTPUT_H</span>
+<span class="cp">#define OUTPUT_H</span>
+
+<span class="c1">// Turns built in LED ON (PIN 13)</span>
+<span class="kt">void</span> <span class="nf">builtLedOn</span><span class="p">();</span>
+
+<span class="c1">// Turns built in LED OFF (PIN 13)</span>
+<span class="kt">void</span> <span class="nf">builtLedOff</span><span class="p">();</span>
+
+<span class="cp">#endif </span><span class="cm">/* OUTPUT_H */</span><span class="cp"></span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">src/output.cpp</span></code></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;Cosa/OutputPin.hh&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;output.h&gt;</span><span class="cp"></span>
+
+<span class="n">OutputPin</span> <span class="nf">ledPin</span><span class="p">(</span><span class="n">Board</span><span class="o">::</span><span class="n">LED</span><span class="p">);</span>
+
+<span class="kt">void</span> <span class="nf">builtLedOn</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">ledPin</span><span class="p">.</span><span class="n">on</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">builtLedOff</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">ledPin</span><span class="p">.</span><span class="n">off</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">tests/main.cpp</span></code></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;Cosa/RTT.hh&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;output.h&gt;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">RTT</span><span class="o">::</span><span class="n">begin</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">builtLedOn</span><span class="p">();</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+    <span class="n">builtLedOff</span><span class="p">();</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-and-upload-test-target">
+<span id="run-and-upload-test-target"></span><h2>Run and Upload Test target<a class="headerlink" href="#run-and-upload-test-target" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>To build the project</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wio</span> <span class="n">run</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>To upload the project</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wio</span> <span class="n">run</span> <span class="o">--</span><span class="n">upload</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../configurations/config.html" class="btn btn-neutral float-right" title="Project Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="creating-app.html" class="btn btn-neutral" title="Creating App" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Waterloop.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="http://prose.io/#rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.0',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
