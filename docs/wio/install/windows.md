@@ -1,6 +1,6 @@
 # Windows
 
-Wio is available for windows platform through `NPM` and `Scoop`.
+Wio is available for windows through `NPM` and `Scoop`.
 
 ## Scoop
 Scoop is a windows package manager. It downloads binaries like how linux package managers do. You can use scoop if you have powershell 13 or above. To install Scoop, type the following in powershell:
@@ -24,7 +24,7 @@ scoop install wio
 # using scoop
 scoop install nodejs
 ```
-If you do not want to use *scoop*, you can download *NPM* from their [official website](https://nodejs.org/en/download/)
+If you do not want to use *scoop*, you can download *NPM* from their [official website](https://nodejs.org/en/download/).
 
 Now that you have `NPM` installed, you can use it to install `wio`:
 ```bash
@@ -48,3 +48,7 @@ This toolchain is used to build any AVR project and must be installed:
 
 * Download [Core Arduino](https://www.arduino.cc/en/Main/Software) and install it. This will contains all the compilers and tools needed for building and uploading the binaries
 * Go to Arduino install directory, ex: `C:\Program Files (x86)\Arduino` and from there go to `hardware\tools\avr\bin`. Grab the whole path and add that to your environment PATH
+
+### Native toolchain
+In order to develop C/C++ programs, you need to develop toolchain to compile and build those projects. For windows, most popular for them are `MinGW` and `Cygwin`. To install those, you can follow [this tutorial](https://www3.ntu.edu.sg/home/ehchua/programming/howto/Cygwin_HowTo.html) or just google instructions.
+

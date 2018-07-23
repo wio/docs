@@ -1,0 +1,29 @@
+type: pkg
+
+project:
+  name: examplePackage
+  license: MIT
+  author: Wio
+  version: 0.0.1
+  keywords:
+  - wio
+  - app
+  compile_options:
+    wio_version: 0.4.0
+    default_target: main
+
+targets:
+  native:
+    src: tests/native
+    platform: native
+  arduino:
+    src: tests/arduino
+    platform: avr
+    framework: arduino
+    board: uno
+  cosa:
+    src: tests/cosa
+    platform: avr
+    framework: cosa
+    board: uno
+

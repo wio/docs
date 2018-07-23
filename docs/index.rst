@@ -28,8 +28,3 @@ Contents
 	wio/getting-started/creating-app
 	wio/getting-started/creating-pkg
 
-.. toctree::
-	:caption: Configuration
-	:maxdepth: 2
-	
-	wio/configurations/config
