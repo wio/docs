@@ -91,6 +91,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#wio-build-tools">Wio build Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#platform-toolchain">Platform toolchain</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#atmel-avr-toolchain">Atmel AVR toolchain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#native-toolchain">Native toolchain</a></li>
 </ul>
 </li>
 </ul>
@@ -100,10 +101,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/creating-app.html">Creating App</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/creating-pkg.html">Creating Pkg</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Configuration</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../configurations/config.html">Project Configuration</a></li>
 </ul>
 
             
@@ -172,7 +169,7 @@
             
   <div class="section" id="windows">
 <span id="windows"></span><h1>Windows<a class="headerlink" href="#windows" title="Permalink to this headline">¶</a></h1>
-<p>Wio is available for windows platform through <code class="docutils literal notranslate"><span class="pre">NPM</span></code> and <code class="docutils literal notranslate"><span class="pre">Scoop</span></code>.</p>
+<p>Wio is available for windows through <code class="docutils literal notranslate"><span class="pre">NPM</span></code> and <code class="docutils literal notranslate"><span class="pre">Scoop</span></code>.</p>
 <div class="section" id="scoop">
 <span id="scoop"></span><h2>Scoop<a class="headerlink" href="#scoop" title="Permalink to this headline">¶</a></h2>
 <p>Scoop is a windows package manager. It downloads binaries like how linux package managers do. You can use scoop if you have powershell 13 or above. To install Scoop, type the following in powershell:</p>
@@ -196,7 +193,7 @@ scoop install wio
 scoop install nodejs
 </pre></div>
 </div>
-<p>If you do not want to use <em>scoop</em>, you can download <em>NPM</em> from their <a class="reference external" href="https://nodejs.org/en/download/">official website</a></p>
+<p>If you do not want to use <em>scoop</em>, you can download <em>NPM</em> from their <a class="reference external" href="https://nodejs.org/en/download/">official website</a>.</p>
 <p>Now that you have <code class="docutils literal notranslate"><span class="pre">NPM</span></code> installed, you can use it to install <code class="docutils literal notranslate"><span class="pre">wio</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>npm install -g wio
 </pre></div>
@@ -221,6 +218,10 @@ scoop install cmake make
 <li>Download <a class="reference external" href="https://www.arduino.cc/en/Main/Software">Core Arduino</a> and install it. This will contains all the compilers and tools needed for building and uploading the binaries</li>
 <li>Go to Arduino install directory, ex: <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files</span> <span class="pre">(x86)\Arduino</span></code> and from there go to <code class="docutils literal notranslate"><span class="pre">hardware\tools\avr\bin</span></code>. Grab the whole path and add that to your environment PATH</li>
 </ul>
+</div>
+<div class="section" id="native-toolchain">
+<span id="native-toolchain"></span><h3>Native toolchain<a class="headerlink" href="#native-toolchain" title="Permalink to this headline">¶</a></h3>
+<p>In order to develop C/C++ programs, you need to develop toolchain to compile and build those projects. For windows, most popular for them are <code class="docutils literal notranslate"><span class="pre">MinGW</span></code> and <code class="docutils literal notranslate"><span class="pre">Cygwin</span></code>. To install those, you can follow <a class="reference external" href="https://www3.ntu.edu.sg/home/ehchua/programming/howto/Cygwin_HowTo.html">this tutorial</a> or just google instructions.</p>
 </div>
 </div>
 </div>

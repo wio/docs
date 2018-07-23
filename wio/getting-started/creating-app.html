@@ -91,16 +91,11 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Creating App</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#setting-up-the-project">Setting up the Project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#project-structure">Project Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#source-files">Source Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#run-and-upload">Run and Upload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#initialize-the-app">Initialize the App</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-and-executing">Building and Executing</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="creating-pkg.html">Creating Pkg</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Configuration</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../configurations/config.html">Project Configuration</a></li>
 </ul>
 
             
@@ -169,103 +164,157 @@
             
   <div class="section" id="creating-app">
 <span id="creating-app"></span><h1>Creating App<a class="headerlink" href="#creating-app" title="Permalink to this headline">¶</a></h1>
-<p>Project of type <code class="docutils literal notranslate"><span class="pre">app</span></code> is an executable project that can be executed.</p>
+<p>In the ecosystem of <code class="docutils literal notranslate"><span class="pre">wio</span></code>, <code class="docutils literal notranslate"><span class="pre">app</span></code> is a project that can be executed or uploaded. It is what runs on machines and displays “Hello world”.</p>
 <div class="section" id="setting-up-the-project">
 <span id="setting-up-the-project"></span><h2>Setting up the Project<a class="headerlink" href="#setting-up-the-project" title="Permalink to this headline">¶</a></h2>
-<p>Create wio example project</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wio</span> <span class="n">create</span> <span class="n">app</span> <span class="n">avr</span> <span class="n">testDir</span> <span class="o">--</span><span class="n">create</span><span class="o">-</span><span class="n">example</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wio</span> <span class="n">create</span> <span class="n">app</span> <span class="n">projectDir</span>
 </pre></div>
 </div>
+<ul>
+<li><p class="first">This will create a project in directory <code class="docutils literal notranslate"><span class="pre">projectDir</span></code></p>
+</li>
+<li><p class="first">This application has no <code class="docutils literal notranslate"><span class="pre">platform</span></code>, <code class="docutils literal notranslate"><span class="pre">framework</span></code>, and <code class="docutils literal notranslate"><span class="pre">board</span></code></p>
 <ul class="simple">
-<li>This will create a project in directory <code class="docutils literal notranslate"><span class="pre">testDir</span></code></li>
-<li>The board for this project is set to <code class="docutils literal notranslate"><span class="pre">uno</span></code> by default</li>
+<li>You will need to specify these fields before a project can be built.</li>
+<li>You can create various targets for various configurations.</li>
+<li>For example to create an <code class="docutils literal notranslate"><span class="pre">AVR</span></code> project:</li>
 </ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wio</span> <span class="n">create</span> <span class="n">app</span> <span class="o">--</span><span class="n">platform</span> <span class="n">avr</span> <span class="o">--</span><span class="n">framework</span> <span class="n">arduino</span> <span class="o">--</span><span class="n">board</span> <span class="n">uno</span> <span class="n">projectDir</span>
+</pre></div>
 </div>
-<div class="section" id="project-structure">
-<span id="project-structure"></span><h2>Project Structure<a class="headerlink" href="#project-structure" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>testDir
+</li>
+</ul>
+<p>Congrats you have created your first <code class="docutils literal notranslate"><span class="pre">wio</span></code> application. Your project structure will look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>projectDir
 ├── src
-│   └── main.cpp
 ├── wio.yml
+├── README.md
+├── .gitignore
 </pre></div>
 </div>
-</div>
-<div class="section" id="source-files">
-<span id="source-files"></span><h2>Source Files<a class="headerlink" href="#source-files" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">wio.yml</span></code></li>
-</ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># define global app configurations. This is an application and can be built, run and uploaded. Some terminology:</span>
-<span class="c1"># - Framework: SDK for the application (cosa, arduino, c, c++, etc)</span>
-<span class="c1"># - Platform: platform to build application for</span>
-<span class="c1"># - Dependencies: wio packages</span>
-<span class="l l-Scalar l-Scalar-Plain">app</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">testDir</span>
-  <span class="l l-Scalar l-Scalar-Plain">ide</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">none</span>
+<p>The result of generated <code class="docutils literal notranslate"><span class="pre">wio.yml</span></code> file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">app</span>
 
-  <span class="l l-Scalar l-Scalar-Plain">config</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">minimum_wio_version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.3.2</span>
-    <span class="l l-Scalar l-Scalar-Plain">supported_platforms</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">avr</span>
-    <span class="l l-Scalar l-Scalar-Plain">supported_frameworks</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cosa</span>
-    <span class="l l-Scalar l-Scalar-Plain">supported_boards</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">uno</span>
-
+<span class="l l-Scalar l-Scalar-Plain">project</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">projectDir</span>
+  <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.1</span>
+  <span class="l l-Scalar l-Scalar-Plain">keywords</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">wio</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">app</span>
   <span class="l l-Scalar l-Scalar-Plain">compile_options</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">platform</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">avr</span>
+    <span class="l l-Scalar l-Scalar-Plain">wio_version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.4.0</span>
+    <span class="l l-Scalar l-Scalar-Plain">default_target</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">main</span>
 
-<span class="c1"># &quot;targets&quot; tag allows for testing and development for various settings and configurations. You can create</span>
-<span class="c1"># multiple targets where you can define different types of boards, frameworks and flags. By default one target</span>
-<span class="c1"># is created, which is defined based on settings provided in the creation process.</span>
 <span class="l l-Scalar l-Scalar-Plain">targets</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">main</span>
-  <span class="l l-Scalar l-Scalar-Plain">create</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">src</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">src</span>
-      <span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cosa</span>
-      <span class="l l-Scalar l-Scalar-Plain">board</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uno</span>
-      <span class="l l-Scalar l-Scalar-Plain">flags</span><span class="p p-Indicator">:</span>
-        <span class="l l-Scalar l-Scalar-Plain">global_flags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
-        <span class="l l-Scalar l-Scalar-Plain">target_flags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
-      <span class="l l-Scalar l-Scalar-Plain">definitions</span><span class="p p-Indicator">:</span>
-        <span class="l l-Scalar l-Scalar-Plain">global_definitions</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
-        <span class="l l-Scalar l-Scalar-Plain">target_definitions</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
+  <span class="l l-Scalar l-Scalar-Plain">main</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">src</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">src</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">src/main.cpp</span></code></li>
-</ul>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;Cosa/RTT.hh&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;Cosa/OutputPin.hh&gt;</span><span class="cp"></span>
+</div>
+<div class="section" id="initialize-the-app">
+<span id="initialize-the-app"></span><h2>Initialize the App<a class="headerlink" href="#initialize-the-app" title="Permalink to this headline">¶</a></h2>
+<p>Now you can create <code class="docutils literal notranslate"><span class="pre">main_native.cpp</span></code> and <code class="docutils literal notranslate"><span class="pre">main_arduino.cpp</span></code> files and place them in <code class="docutils literal notranslate"><span class="pre">src</span></code> folder based on their target.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> projectDir
+mkdir src/native
+mkdir src/arduino
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">main_native.cpp</span></code> file in <code class="docutils literal notranslate"><span class="pre">src/native</span></code> directory:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
-<span class="n">OutputPin</span> <span class="nf">ledPin</span><span class="p">(</span><span class="n">Board</span><span class="o">::</span><span class="n">LED</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello world!!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">main_arduino.cpp</span></code> file in <code class="docutils literal notranslate"><span class="pre">src/arduino</span></code> directory:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Blink</span>
+<span class="cm"> *</span>
+<span class="cm"> * Turns on an LED on for one second,</span>
+<span class="cm"> *  then off for one second, repeatedly.</span>
+<span class="cm"> */</span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;Arduino.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#ifndef LED_BUILTIN </span>
+<span class="cp">#define LED_BUILTIN 13</span>
+<span class="cp">#endif</span>
 
 <span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">RTT</span><span class="o">::</span><span class="n">begin</span><span class="p">();</span>
-<span class="p">}</span>
+    <span class="c1">// initialize LED digital pin as an output. </span>
+    <span class="n">pinMode</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+<span class="p">}</span> 
 
 <span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">ledPin</span><span class="p">.</span><span class="n">on</span><span class="p">();</span>
-    <span class="n">delay</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
-    <span class="n">ledPin</span><span class="p">.</span><span class="n">off</span><span class="p">();</span>
-    <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+    <span class="c1">// turn the LED on (HIGH is the voltage level) </span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+
+    <span class="c1">// wait for a second </span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+    
+    <span class="c1">// turn the LED off by making the voltage LOW</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+    
+    <span class="c1">// wait for a second </span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="run-and-upload">
-<span id="run-and-upload"></span><h2>Run and Upload<a class="headerlink" href="#run-and-upload" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>To build the project</li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wio</span> <span class="n">run</span>
+<p>Final project structure will look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>projectDir
+└── src
+    └── native
+        └── main_native.cpp
+    └── arduino
+        └── main_arduino.cpp
+├── wio.yml
+├── README.md
+├── .gitignore
 </pre></div>
 </div>
-<ul class="simple">
-<li>To upload the project</li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wio</span> <span class="n">run</span> <span class="o">--</span><span class="n">upload</span>
+</div>
+<div class="section" id="building-and-executing">
+<span id="building-and-executing"></span><h2>Building and Executing<a class="headerlink" href="#building-and-executing" title="Permalink to this headline">¶</a></h2>
+<p>We have two sets of code that we want to build and run. This is achieved by using targets. We will modify <code class="docutils literal notranslate"><span class="pre">wio.yml</span></code> file and create a target for both <code class="docutils literal notranslate"><span class="pre">native</span></code> and <code class="docutils literal notranslate"><span class="pre">arduino</span></code> code.</p>
+<p><code class="docutils literal notranslate"><span class="pre">wio.yml</span></code> after update:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">app</span>
+
+<span class="l l-Scalar l-Scalar-Plain">project</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">projectDir</span>
+  <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.1</span>
+  <span class="l l-Scalar l-Scalar-Plain">keywords</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">wio</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">app</span>
+  <span class="l l-Scalar l-Scalar-Plain">compile_options</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">wio_version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.4.0</span>
+
+<span class="l l-Scalar l-Scalar-Plain">targets</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">src</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">src/native</span>
+    <span class="l l-Scalar l-Scalar-Plain">platform</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">native</span>
+  <span class="l l-Scalar l-Scalar-Plain">arduino</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">src</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">src/arduino</span>
+    <span class="l l-Scalar l-Scalar-Plain">platform</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">avr</span>
+    <span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">arduino</span>
+    <span class="l l-Scalar l-Scalar-Plain">board</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uno</span>
+</pre></div>
+</div>
+<p>If you want to test using a different framework like <code class="docutils literal notranslate"><span class="pre">Cosa</span></code> or a different board like <code class="docutils literal notranslate"><span class="pre">mega2560</span></code>, you can create even more targets.</p>
+<p>Building each target is very simple:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># native target</span>
+wio build native
+
+<span class="c1"># arduino target</span>
+wio build arduino
+</pre></div>
+</div>
+<p>To execute each target:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># native</span>
+wio run native
+
+<span class="c1"># arduino</span>
+wio run arduino
 </pre></div>
 </div>
 </div>

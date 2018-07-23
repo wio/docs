@@ -87,6 +87,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#wio-build-tools">Wio build Tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#platform-toolchain">Platform toolchain</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#atmel-avr-toolchain">Atmel AVR toolchain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#native-toolchain">Native toolchain</a></li>
 </ul>
 </li>
 </ul>
@@ -98,10 +99,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/creating-app.html">Creating App</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../getting-started/creating-pkg.html">Creating Pkg</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Configuration</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../configurations/config.html">Project Configuration</a></li>
 </ul>
 
             
@@ -183,14 +180,14 @@ sudo pacman -S nodejs
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>npm install -g wio
 </pre></div>
 </div>
-<p>Sometimes there are issues with permission, and to resolve those issues, you can do,</p>
+<p>Sometimes there are issues with permissions, and to resolve those issues, you can do:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo npm install -g wio --unsafe-perm
 </pre></div>
 </div>
-<p>Hurray! you have <strong>wio</strong> installed but wait there are few more things before you get started. You will have to install toolchain for the platform you are building. You will also have to install build tools used by <strong>wio</strong></p>
+<p>Hurray! you have <strong>wio</strong> installed but wait there are few more things before you can get started. You will have to install toolchain for the platform you are building. You will also have to install build tools used by <strong>wio</strong></p>
 <div class="section" id="wio-build-tools">
 <span id="wio-build-tools"></span><h2>Wio build Tools<a class="headerlink" href="#wio-build-tools" title="Permalink to this headline">¶</a></h2>
-<p>Wio uses <code class="docutils literal notranslate"><span class="pre">cmake</span></code> and <code class="docutils literal notranslate"><span class="pre">make</span></code> to compile the project. To install <code class="docutils literal notranslate"><span class="pre">cmake</span></code> and <code class="docutils literal notranslate"><span class="pre">make</span></code>:</p>
+<p>Wio uses <code class="docutils literal notranslate"><span class="pre">cmake</span></code> and <code class="docutils literal notranslate"><span class="pre">make</span></code> to compile the project. Most likely your machine already has <code class="docutils literal notranslate"><span class="pre">make</span></code> installed. To install <code class="docutils literal notranslate"><span class="pre">cmake</span></code> and <code class="docutils literal notranslate"><span class="pre">make</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># ubuntu</span>
 sudo apt-get install cmake make
 
@@ -198,7 +195,7 @@ sudo apt-get install cmake make
 sudo pacman -S cmake make
 </pre></div>
 </div>
-<p>For more information on how to install, check <a class="reference external" href="https://cmake.org/download/">cmake website</a>. <code class="docutils literal notranslate"><span class="pre">make</span></code> should be installed already!</p>
+<p>For more information on how to install, check <a class="reference external" href="https://cmake.org/download/">cmake website</a>.</p>
 </div>
 <div class="section" id="platform-toolchain">
 <span id="platform-toolchain"></span><h2>Platform toolchain<a class="headerlink" href="#platform-toolchain" title="Permalink to this headline">¶</a></h2>
@@ -212,6 +209,18 @@ sudo pacman -S cmake make
 <span class="n">sudo</span> <span class="n">pacman</span> <span class="o">-</span><span class="n">S</span> <span class="n">avr</span><span class="o">-</span><span class="n">gcc</span> <span class="n">avr</span><span class="o">-</span><span class="n">libc</span> <span class="n">avrdude</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="native-toolchain">
+<span id="native-toolchain"></span><h3>Native toolchain<a class="headerlink" href="#native-toolchain" title="Permalink to this headline">¶</a></h3>
+<p>In order to develop C/C++ programs, you need to download toolchain to compile and build those projects. Most popular of them is is <code class="docutils literal notranslate"><span class="pre">gcc</span></code> and most likely your machine already comes with it. In order to install <code class="docutils literal notranslate"><span class="pre">gcc</span></code>, you can do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ubuntu</span>
+<span class="n">sudp</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">gcc</span>
+
+<span class="c1"># arc</span>
+<span class="n">sudo</span> <span class="n">pacman</span> <span class="o">-</span><span class="n">S</span> <span class="n">gcc</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> You can you any compile you like <code class="docutils literal notranslate"><span class="pre">gcc</span></code> is just one example.</p>
 </div>
 </div>
 </div>

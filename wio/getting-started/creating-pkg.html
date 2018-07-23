@@ -28,7 +28,6 @@
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Project Configuration" href="../configurations/config.html" />
     <link rel="prev" title="Creating App" href="creating-app.html" /> 
 
   
@@ -92,15 +91,10 @@
 <li class="toctree-l1"><a class="reference internal" href="creating-app.html">Creating App</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Creating Pkg</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#setting-up-the-project">Setting up the Project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#project-structure">Project Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#source-files">Source Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#run-and-upload-test-target">Run and Upload Test target</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#initialize-the-package">Initialize the Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-and-executing">Building and Executing</a></li>
 </ul>
 </li>
-</ul>
-<p class="caption"><span class="caption-text">Configuration</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../configurations/config.html">Project Configuration</a></li>
 </ul>
 
             
@@ -169,162 +163,177 @@
             
   <div class="section" id="creating-pkg">
 <span id="creating-pkg"></span><h1>Creating Pkg<a class="headerlink" href="#creating-pkg" title="Permalink to this headline">¶</a></h1>
-<p>Project of type <code class="docutils literal notranslate"><span class="pre">pkg</span></code> is a package that is meant to be imported by other projects. This makes code sharing easier and modular.</p>
+<p>In the ecosystem of <code class="docutils literal notranslate"><span class="pre">wio</span></code>, <code class="docutils literal notranslate"><span class="pre">pkg</span></code> is a project that is included as a dependency by other projects. It cannot be executed on its own.</p>
 <div class="section" id="setting-up-the-project">
 <span id="setting-up-the-project"></span><h2>Setting up the Project<a class="headerlink" href="#setting-up-the-project" title="Permalink to this headline">¶</a></h2>
-<p>Create wio example project</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wio</span> <span class="n">create</span> <span class="n">pkg</span> <span class="n">avr</span> <span class="n">testDir</span> <span class="o">--</span><span class="n">create</span><span class="o">-</span><span class="n">example</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wio</span> <span class="n">create</span> <span class="n">pkg</span> <span class="n">examplePackage</span> 
 </pre></div>
 </div>
 <ul class="simple">
-<li>This will create a project in directory <code class="docutils literal notranslate"><span class="pre">testDir</span></code></li>
-<li>The board for the test target is set to <code class="docutils literal notranslate"><span class="pre">uno</span></code> by default</li>
+<li>This will create a project in directory <code class="docutils literal notranslate"><span class="pre">examplePackage</span></code></li>
 </ul>
-</div>
-<div class="section" id="project-structure">
-<span id="project-structure"></span><h2>Project Structure<a class="headerlink" href="#project-structure" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>testDir
+<p>Congrats you have created your first <code class="docutils literal notranslate"><span class="pre">wio</span></code> package. Your project structure will look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>examplePackage
 ├── include
-│   └── output.h
 ├── src
-│   └── output.cpp
 ├── tests
-│   └── main.cpp
 ├── wio.yml
+├── README.md
+├── .gitignore
 </pre></div>
 </div>
-</div>
-<div class="section" id="source-files">
-<span id="source-files"></span><h2>Source Files<a class="headerlink" href="#source-files" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">wio.yml</span></code></li>
-</ul>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># define global pkg configurations. This is a package and is created to be used by other wio projects. Even though</span>
-<span class="c1"># package cannot be built, it can be tested by using &quot;tests&quot; directory. Some terminology:</span>
-<span class="c1"># - Framework: SDK for the application (cosa, arduino, c, c++, etc)</span>
-<span class="c1"># - Platform: platform to build application for</span>
-<span class="c1"># - Dependencies: wio packages</span>
-<span class="l l-Scalar l-Scalar-Plain">pkg</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">ide</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">none</span>
+<p>The result of generated <code class="docutils literal notranslate"><span class="pre">wio.yml</span></code> file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">pkg</span>
 
-  <span class="l l-Scalar l-Scalar-Plain">meta</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">testDir</span>
-    <span class="l l-Scalar l-Scalar-Plain">description</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">A wio avr pkg using cosa framework</span>
-    <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.1</span>
-    <span class="l l-Scalar l-Scalar-Plain">keywords</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">avr</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">c</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">c++</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">wio</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cosa</span>
-    <span class="l l-Scalar l-Scalar-Plain">license</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">MIT</span>
-
-  <span class="l l-Scalar l-Scalar-Plain">config</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">minimum_wio_version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.3.2</span>
-    <span class="l l-Scalar l-Scalar-Plain">supported_platforms</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">avr</span>
-    <span class="l l-Scalar l-Scalar-Plain">supported_frameworks</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cosa</span>
-    <span class="l l-Scalar l-Scalar-Plain">supported_boards</span><span class="p p-Indicator">:</span>
-    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">uno</span>
-
+<span class="l l-Scalar l-Scalar-Plain">project</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">examplePackage</span>
+  <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.1</span>
+  <span class="l l-Scalar l-Scalar-Plain">keywords</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">wio</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pkg</span>
   <span class="l l-Scalar l-Scalar-Plain">compile_options</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">header_only</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
-    <span class="l l-Scalar l-Scalar-Plain">platform</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">avr</span>
-  <span class="l l-Scalar l-Scalar-Plain">flags</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">allow_only_global_flags</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
-    <span class="l l-Scalar l-Scalar-Plain">allow_only_required_flags</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
-    <span class="l l-Scalar l-Scalar-Plain">global_flags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
-    <span class="l l-Scalar l-Scalar-Plain">visibility</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">PRIVATE</span>
-  <span class="l l-Scalar l-Scalar-Plain">definitions</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">allow_only_global_definitions</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
-    <span class="l l-Scalar l-Scalar-Plain">allow_only_required_definitions</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
-    <span class="l l-Scalar l-Scalar-Plain">global_definitions</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
-    <span class="l l-Scalar l-Scalar-Plain">visibility</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">PRIVATE</span>
+    <span class="l l-Scalar l-Scalar-Plain">wio_version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.4.0</span>
+    <span class="l l-Scalar l-Scalar-Plain">default_target</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">tests</span>
 
-<span class="c1"># &quot;targets&quot; tag allows for testing and development for various settings and configurations. You can create</span>
-<span class="c1"># multiple targets where you can define different types of boards, frameworks and flags. By default one target</span>
-<span class="c1"># is created, which is defined based on settings provided in the creation process.</span>
 <span class="l l-Scalar l-Scalar-Plain">targets</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">default</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">tests</span>
-  <span class="l l-Scalar l-Scalar-Plain">create</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">tests</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">src</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">tests</span>
-      <span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cosa</span>
-      <span class="l l-Scalar l-Scalar-Plain">board</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uno</span>
-      <span class="l l-Scalar l-Scalar-Plain">flags</span><span class="p p-Indicator">:</span>
-        <span class="l l-Scalar l-Scalar-Plain">global_flags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
-        <span class="l l-Scalar l-Scalar-Plain">target_flags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
-        <span class="l l-Scalar l-Scalar-Plain">pkg_flags</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
-      <span class="l l-Scalar l-Scalar-Plain">definitions</span><span class="p p-Indicator">:</span>
-        <span class="l l-Scalar l-Scalar-Plain">global_definitions</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
-        <span class="l l-Scalar l-Scalar-Plain">target_definitions</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
-        <span class="l l-Scalar l-Scalar-Plain">pkg_definitions</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[]</span>
+  <span class="l l-Scalar l-Scalar-Plain">tests</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">src</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">tests</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">include/output.h</span></code></li>
-</ul>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef OUTPUT_H</span>
-<span class="cp">#define OUTPUT_H</span>
+</div>
+<div class="section" id="initialize-the-package">
+<span id="initialize-the-package"></span><h2>Initialize the Package<a class="headerlink" href="#initialize-the-package" title="Permalink to this headline">¶</a></h2>
+<p>Now we will create <code class="docutils literal notranslate"><span class="pre">hello.hh</span></code> and <code class="docutils literal notranslate"><span class="pre">hello.cpp</span></code> files and place them in <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">src</span></code> folder respectively.</p>
+<p><code class="docutils literal notranslate"><span class="pre">hello.hh</span></code> file in <code class="docutils literal notranslate"><span class="pre">include</span></code> directory:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef HELLO_HH</span>
+<span class="cp">#define HELLO_HH</span>
 
-<span class="c1">// Turns built in LED ON (PIN 13)</span>
-<span class="kt">void</span> <span class="nf">builtLedOn</span><span class="p">();</span>
+<span class="kt">void</span> <span class="nf">printHello</span><span class="p">();</span>
 
-<span class="c1">// Turns built in LED OFF (PIN 13)</span>
-<span class="kt">void</span> <span class="nf">builtLedOff</span><span class="p">();</span>
-
-<span class="cp">#endif </span><span class="cm">/* OUTPUT_H */</span><span class="cp"></span>
+<span class="cp">#endif</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">src/output.cpp</span></code></li>
-</ul>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;Cosa/OutputPin.hh&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;output.h&gt;</span><span class="cp"></span>
+<p><code class="docutils literal notranslate"><span class="pre">hello.cpp</span></code> file in <code class="docutils literal notranslate"><span class="pre">src</span></code> directory:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;hello.hh&quot;</span><span class="cp"></span>
 
-<span class="n">OutputPin</span> <span class="nf">ledPin</span><span class="p">(</span><span class="n">Board</span><span class="o">::</span><span class="n">LED</span><span class="p">);</span>
+<span class="cp">#if defined(WIO_PLATFORM_AVR) &amp;&amp; defined(WIO_FRAMEWORK_ARDUINO)</span>
+<span class="cp">#include</span> <span class="cpf">&lt;Arduino.h&gt;</span><span class="cp"></span>
 
-<span class="kt">void</span> <span class="nf">builtLedOn</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">ledPin</span><span class="p">.</span><span class="n">on</span><span class="p">();</span>
+<span class="kt">void</span> <span class="nf">printHello</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello world&quot;</span><span class="p">);</span>
 <span class="p">}</span>
+<span class="cp">#elif defined(WIO_PLATFORM_NATIVE)</span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
-<span class="kt">void</span> <span class="nf">builtLedOff</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">ledPin</span><span class="p">.</span><span class="n">off</span><span class="p">();</span>
+<span class="kt">void</span> <span class="nf">printHello</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello World&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">#else</span>
+<span class="cp">#error &quot;Unsupported Platform or Framework&quot;</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<p>Final project structure will look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>examplePackage
+└── include
+    └── hello.hh
+└── src
+    └── hello.cpp
+├── wio.yml
+├── README.md
+├── .gitignore
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-and-executing">
+<span id="building-and-executing"></span><h2>Building and Executing<a class="headerlink" href="#building-and-executing" title="Permalink to this headline">¶</a></h2>
+<p>We have a package where “Hello World” is printed based on what platform the code is compiled and executed on. In order to test this package, we will create multiple targets for various platforms and see if our package code works.</p>
+<p><code class="docutils literal notranslate"><span class="pre">wio.yml</span></code> after update:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">pkg</span>
+
+<span class="l l-Scalar l-Scalar-Plain">project</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">examplePackage</span>
+  <span class="l l-Scalar l-Scalar-Plain">license</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">MIT</span>
+  <span class="l l-Scalar l-Scalar-Plain">author</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Wio</span>
+  <span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.1</span>
+  <span class="l l-Scalar l-Scalar-Plain">keywords</span><span class="p p-Indicator">:</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">wio</span>
+  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">app</span>
+  <span class="l l-Scalar l-Scalar-Plain">compile_options</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">wio_version</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">0.4.0</span>
+    <span class="l l-Scalar l-Scalar-Plain">default_target</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">main</span>
+
+<span class="l l-Scalar l-Scalar-Plain">targets</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">native</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">src</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">tests/native</span>
+    <span class="l l-Scalar l-Scalar-Plain">platform</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">native</span>
+  <span class="l l-Scalar l-Scalar-Plain">arduino</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">src</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">tests/arduino</span>
+    <span class="l l-Scalar l-Scalar-Plain">platform</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">avr</span>
+    <span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">arduino</span>
+    <span class="l l-Scalar l-Scalar-Plain">board</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uno</span>
+  <span class="l l-Scalar l-Scalar-Plain">cosa</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">src</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">tests/cosa</span>
+    <span class="l l-Scalar l-Scalar-Plain">platform</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">avr</span>
+    <span class="l l-Scalar l-Scalar-Plain">framework</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cosa</span>
+    <span class="l l-Scalar l-Scalar-Plain">board</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">uno</span>
+</pre></div>
+</div>
+<p>Testing the package is simple but, before we do that, we need to create a simple test for <code class="docutils literal notranslate"><span class="pre">native</span></code> and <code class="docutils literal notranslate"><span class="pre">avr</span></code> platforms.</p>
+<p><code class="docutils literal notranslate"><span class="pre">test.cpp</span></code> file in <code class="docutils literal notranslate"><span class="pre">tests/native</span></code> directory:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;hello.hh&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">printHello</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">tests/main.cpp</span></code></li>
-</ul>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;Cosa/RTT.hh&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;output.h&gt;</span><span class="cp"></span>
+<p><code class="docutils literal notranslate"><span class="pre">test.cpp</span></code> file in <code class="docutils literal notranslate"><span class="pre">tests/arduino</span></code> directory:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;hello.hh&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;Arduino.h&gt;</span><span class="cp"></span>
 
 <span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">RTT</span><span class="o">::</span><span class="n">begin</span><span class="p">();</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">builtLedOn</span><span class="p">();</span>
-    <span class="n">delay</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
-    <span class="n">builtLedOff</span><span class="p">();</span>
-    <span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+    <span class="n">printHello</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="run-and-upload-test-target">
-<span id="run-and-upload-test-target"></span><h2>Run and Upload Test target<a class="headerlink" href="#run-and-upload-test-target" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>To build the project</li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wio</span> <span class="n">run</span>
+<p><code class="docutils literal notranslate"><span class="pre">test.cpp</span></code> file in <code class="docutils literal notranslate"><span class="pre">tests/cosa</span></code> directory:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;hello.hh&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;UART.hh&gt;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">uart</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">printHello</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<ul class="simple">
-<li>To upload the project</li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wio</span> <span class="n">run</span> <span class="o">--</span><span class="n">upload</span>
+<p>Now to build each target:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># native target (valid build)</span>
+wio build native
+
+<span class="c1"># arduino target (valid build)</span>
+wio build arduino
+
+<span class="c1"># cosa target (invalid build)</span>
+wio build cosa
+</pre></div>
+</div>
+<p>To execute each target:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># native</span>
+wio run native
+
+<span class="c1"># arduino</span>
+wio run arduino
+
+<span class="c1"># cosa (this won&#39;t work because cosa target is not compiled)</span>
+wio run cosa
 </pre></div>
 </div>
 </div>
@@ -337,8 +346,6 @@
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../configurations/config.html" class="btn btn-neutral float-right" title="Project Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="creating-app.html" class="btn btn-neutral" title="Creating App" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

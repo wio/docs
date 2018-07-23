@@ -1,89 +1,160 @@
 # Creating App
 
-Project of type `app` is an executable project that can be executed.
+In the ecosystem of `wio`, `app` is a project that can be executed or uploaded. It is what runs on machines and displays "Hello world".
 
-## Setting up the Project
-Create wio example project 
+## Setting up the Project 
 ```
-wio create app avr testDir --create-example
+wio create app projectDir
 ```
-* This will create a project in directory `testDir`
-* The board for this project is set to `uno` by default 
+* This will create a project in directory `projectDir`
+* This application has no `platform`, `framework`, and `board`
+    * You will need to specify these fields before a project can be built.
+    * You can create various targets for various configurations.
+    * For example to create an `AVR` project:
+    ```
+    wio create app --platform avr --framework arduino --board uno projectDir
+    ```
 
-## Project Structure
+Congrats you have created your first `wio` application. Your project structure will look like this:
 ```
-testDir
+projectDir
 ├── src
-│   └── main.cpp
 ├── wio.yml
+├── README.md
+├── .gitignore
 ```
 
-## Source Files
-* `wio.yml`
+The result of generated `wio.yml` file:
 ```yaml
-# define global app configurations. This is an application and can be built, run and uploaded. Some terminology:
-# - Framework: SDK for the application (cosa, arduino, c, c++, etc)
-# - Platform: platform to build application for
-# - Dependencies: wio packages
-app:
-  name: testDir
-  ide: none
+type: app
 
-  config:
-    minimum_wio_version: 0.3.2
-    supported_platforms:
-    - avr
-    supported_frameworks:
-    - cosa
-    supported_boards:
-    - uno
-
+project:
+  name: projectDir
+  version: 0.0.1
+  keywords:
+  - wio
+  - app
   compile_options:
-    platform: avr
+    wio_version: 0.4.0
+    default_target: main
 
-# "targets" tag allows for testing and development for various settings and configurations. You can create
-# multiple targets where you can define different types of boards, frameworks and flags. By default one target
-# is created, which is defined based on settings provided in the creation process.
 targets:
-  default: main
-  create:
-    main:
-      src: src
-      framework: cosa
-      board: uno
-      flags:
-        global_flags: []
-        target_flags: []
-      definitions:
-        global_definitions: []
-        target_definitions: []
-
+  main:
+    src: src
 ```
-* `src/main.cpp`
-```cpp
-#include <Cosa/RTT.hh>
-#include <Cosa/OutputPin.hh>
 
-OutputPin ledPin(Board::LED);
+## Initialize the App
+
+Now you can create `main_native.cpp` and `main_arduino.cpp` files and place them in `src` folder based on their target.
+
+```bash
+cd projectDir
+mkdir src/native
+mkdir src/arduino
+```
+
+`main_native.cpp` file in `src/native` directory:
+```cpp
+#include <iostream>
+
+int main() {
+    std::cout << "Hello world!!" << std::endl;
+}
+```
+
+`main_arduino.cpp` file in `src/arduino` directory:
+```cpp
+/**
+ * Blink
+ *
+ * Turns on an LED on for one second,
+ *  then off for one second, repeatedly.
+ */
+
+#include "Arduino.h"
+
+#ifndef LED_BUILTIN 
+#define LED_BUILTIN 13
+#endif
 
 void setup() {
-    RTT::begin();
-}
+    // initialize LED digital pin as an output. 
+    pinMode(LED_BUILTIN, OUTPUT);
+} 
 
 void loop() {
-    ledPin.on();
-    delay(50);
-    ledPin.off();
-    delay(500);
+    // turn the LED on (HIGH is the voltage level) 
+    digitalWrite(LED_BUILTIN, HIGH);
+
+    // wait for a second 
+    delay(1000);
+    
+    // turn the LED off by making the voltage LOW
+    digitalWrite(LED_BUILTIN, LOW);
+    
+    // wait for a second 
+    delay(1000);
 }
 ```
 
-## Run and Upload
-* To build the project
+Final project structure will look like:
 ```
-wio run
+projectDir
+└── src
+    └── native
+        └── main_native.cpp
+    └── arduino
+        └── main_arduino.cpp
+├── wio.yml
+├── README.md
+├── .gitignore
 ```
-* To upload the project
+
+## Building and Executing
+
+We have two sets of code that we want to build and run. This is achieved by using targets. We will modify `wio.yml` file and create a target for both `native` and `arduino` code.
+
+`wio.yml` after update:
+```yaml
+type: app
+
+project:
+  name: projectDir
+  version: 0.0.1
+  keywords:
+  - wio
+  - app
+  compile_options:
+    wio_version: 0.4.0
+
+targets:
+  native:
+    src: src/native
+    platform: native
+  arduino:
+    src: src/arduino
+    platform: avr
+    framework: arduino
+    board: uno
 ```
-wio run --upload
+
+If you want to test using a different framework like `Cosa` or a different board like `mega2560`, you can create even more targets.
+
+Building each target is very simple:
+```bash
+# native target
+wio build native
+
+# arduino target
+wio build arduino
 ```
+
+To execute each target:
+```bash
+# native
+wio run native
+
+# arduino
+wio run arduino
+```
+
